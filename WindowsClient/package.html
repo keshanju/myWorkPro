@@ -123,6 +123,7 @@
         $(".BH-Mac-version").find("p").text(version_info);
         //登录获取用户信息
         if (account_token) {
+            //获取用户登陆信息
             packageTransform.getUserInfo({
                 account_token: account_token
             },function (res) {
@@ -132,17 +133,17 @@
                     //是否可以转换套餐
                     billing_type = res.data.billing_type;
                     if (billing_type == 1) {
-                        $(".count-time").text("计时");
-                        $(".count-month").text("包月");
+                        $(".count-time").text(LANG["js"]);
+                        $(".count-month").text(LANG["sy_times"]);
                     } else if (billing_type == 2) {
-                        $(".count-time").text("包月");
-                        $(".count-month").text("计时");
+                        $(".count-time").text(LANG["sy_times"]);
+                        $(".count-month").text(LANG["js"]);
                     }
                     is_switch_package = res.data.is_switch_package;
                 } else if (res.code ==no_login_code) {
-                    layer.alert("登录过期，请重新登录！")
+                    layer.msg(LANG["expried_info"])
                 } else {
-                    layer.alert(res.msg);
+                    layer.msg(res.msg);
                 }
             }),
             packageTransform.getPackageInfo({
@@ -156,7 +157,7 @@
                 });
             });
         } else { 
-            layer.alert("登录过期，请重新登录！")
+            layer.msg(LANG["expried_info"])
         }
         //套餐转换
         $("#translate-BH").on("click", function() {
@@ -193,16 +194,16 @@
                                 $(".count-time").text(text_two);
                                 $(".count-month").text(text_one);
                             } else if (res.code == no_login_code) {
-                                layer.alert("登录过期，请重新登录！");
+                                layer.msg(LANG["expried_info"]);
                             } else {
-                                layer.alert(res.msg);
+                                layer.msg(res.msg);
                             }
                         })
                     })
                 } else if (res.code == no_login_code) {
-                    layer.alert("登录过期，请重新登录！")
+                    layer.msg(LANG["expried_info"])
                 } else {
-                    layer.alert(res.msg);
+                    layer.msg(res.msg);
                 }
             });
         });

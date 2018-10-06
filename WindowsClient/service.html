@@ -38,9 +38,9 @@
         </div>
     </div> -->
     <!-- 定位的版本信息盒子 ，到时候由客户端调用接口进行渲染-->
-    <div class="BH-Mac-version">
+    <!-- <div class="BH-Mac-version">
         <p>Ver:1.1.1.1</p>
-    </div>
+    </div> -->
     <script>
         var service = {
             /**获取url 中的参数
@@ -63,15 +63,14 @@
                 'method' : 'hello',
                 'param1' : 'liuyanwei'
             };
-            window.webkit.messageHandlers.gotoServiceCenter.postMessage(message);
-        });
+            window.external.gotoServiceCenter();
 
         $("#offical_net").on("click", function () {
             var message = {
                 'method' : 'hello',
                 'param1' : 'liuyanwei'
             };
-            window.webkit.messageHandlers.gotoOfficalNet.postMessage(message);
+            window.external.gotoOfficalWebsite();
         })
     </script>
 </body>

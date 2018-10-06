@@ -19,7 +19,7 @@
 
 <body>
 
-    <!-- 定位的头像编辑弹出框123123 123123-->
+    <!-- 定位的头像编辑弹出框 -->
     <div class="edit-photo-BH photo-show">
         <div class="top-edit-info-BH">
             <span data-lang="edit_avatar">编辑头像</span>
@@ -344,26 +344,27 @@
         $(".BH-Mac-version").find("p").text(version_info);
         //如果登录，则调用该接口，实时显示用户信息
         if (account_token) {
+            //登陆获取用户的详细信息
             memberCenter.getUserInfo({
                 account_token: account_token
             }, function (res) {
                 if (res.code == 0) {
                     pravit_mobile = res.data.mobile; //用户登录的手机号或者是邮箱
-                    expiry_time = res.data.expiry_time;
-                    pravit_email = res.data.email;
-                    nick_name = res.data.nickname;
-                    package_id = res.data.package_id;
-                    avatar = res.data.avatar;
-                    billing_type = res.data.billing_type;
-                    // 如果是手机登录，则将手机号显示，如果是邮箱号，则显示邮箱号，这里需要做一个判断，用户是邮箱登录还是手机登录
+                    expiry_time = res.data.expiry_time;// 到期时间
+                    pravit_email = res.data.email; //邮箱号
+                    nick_name = res.data.nickname;//用户昵称
+                    package_id = res.data.package_id;//用户套餐类型
+                    avatar = res.data.avatar;//用户头像
+                    billing_type = res.data.billing_type;//用户是计时还是包月
+                    // 如果是手机登录，则将手机号显示，如果是邮箱号，则显示邮箱号，这里需要做一个判断，用户是邮箱登录还是手机登录，优先显示用户设置的昵称，其次是手机号，最后是用户的邮箱号
                     $(".change-nickname").text(nick_name || pravit_email || pravit_mobile);
                     // 对用户也要做一个判断如果是包月怎么显示，如果是计时怎么显示
                     $(".camera-show").find("img").attr("src", avatar);
+                    // 等于一是计时用户
                     if (billing_type == 1) {
                         $("#count-hours").text(LANG["js"]);
                         $("#surplus-time").find("span").text(LANG["sy_times"] + expiry_time); //用户套餐的有效加速时间
-                    } else if (billing_type == 2) {
-                        $("#count-hours").text(LANG["js"]);
+                    } else if (billing_type == 2) {//等于二是包月用户                        $("#count-hours").text(LANG["js"]);
                         $("#surplus-time").find("span").text(LANG["by"] + expiry_time); //用户套餐的有效加速时间
                     }
                 } else if (res.code == no_login_code) {
@@ -372,6 +373,7 @@
                     layer.msg(res.msg);
                 }
             });
+            //登陆获取新闻详情
             memberCenter.getNewsInfo({
                 page: 1,
                 size: 5
@@ -381,12 +383,14 @@
                     var title_info = v.title;
                     var publish_time = v.publish_time;
                     var new_id = v.id;
+                    //这里的标签跳转地址许哟啊注意格式的书写
                     var n_lis = "<li data-id=" + new_id +
                         "><a href='../notice/"+new_id+".html' target=\"_blank\"><p>" + title_info +
                         "</p></a><span>" + publish_time + "</span></li>";
                     $(".explain-info").append(n_lis);
                 });
             });
+            //登陆获取资讯详情
             memberCenter.getConsult({
                 page: 1,
                 size: 5,
@@ -409,7 +413,7 @@
         } else {
             layer.msg(LANG["expried_info"])
         }
-        //鼠标移上显示相机移开隐藏
+        //鼠标移上显示相机，移开隐藏
         $(".wrap-camera-show").on("mouseenter", function () {
             $(this).find(".wrap-img-show").show();
         });
@@ -431,12 +435,12 @@
         $(".top-of-user-info-BH-Mac").find("img").on("click", function () {
             $(".top-of-user-info-BH-Mac").hide();
             $(".edit-nickname-BH").show();
-            $(".readin-nickname").focus();
+            $(".readin-nickname").focus();//鼠标自动获取焦点
         });
 
         //鼠标失去焦点，获取用户输入的值将输入的值替换给原先的用户名
         $(".readin-nickname").on("blur", function () {
-            var aa = $(".change-nickname").text();
+            var aa = $(".change-nickname").text();//获取用户原先的昵称栏的值
             var nickname = $(this).val();
             if ($(this).val() == '') {
                 $(".change-nickname").text(aa);
@@ -467,7 +471,7 @@
                 'param1': 'liuyanwei'
             };
             // window.webkit.messageHandlers.gotoRecharge.postMessage(message);
-            window.external.gotoRecharge()
+            window.external.gotoRecharge();
         });
     </script>
 </body>

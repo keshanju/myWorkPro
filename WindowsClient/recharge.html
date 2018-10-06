@@ -259,16 +259,16 @@
                             }
 
                             $("#priceList0").find("li").eq(0).trigger("click");
+
                             $("#priceList1").find("li").eq(3).trigger("click");
+
                             $(".payways-of-packages").find("li").eq(0).trigger("click");
 
-                            // 做两层判断，通过is_switch_package 判断是否可以购买两种套餐，通过billing_type 的值判断只能购买当前套餐，其他套餐能购买
+                            // 通过is_switch_package 判断是否可以购买两种套餐，通过billing_type 的值判断只能购买当前套餐，其他套餐能购买
                             if (is_switch_package == 0) {
                                 var curPacId = '#pac' + package_id2;
                                 $(".wrap-packages-BH-mac").find(curPacId).removeClass("disabled").siblings("li").addClass("disabled")
                             }
-
-
                         } else if (res.code == no_login_code) {
                             layer.msg(LANG["expried_info"]);
                         } else {
@@ -292,11 +292,8 @@
                 $(this).find("img").removeClass("photo-show");
                 $(this).siblings().find("img").addClass("photo-show");
                 $(this).addClass("chose").siblings().removeClass("chose");
-                $("#priceList0").find("li").eq(0).trigger("click");
-                $("#priceList1").find("li").eq(3).trigger("click");
-
-
-                
+                // $("#priceList0").find("li").eq(0).trigger("click");
+                // $("#priceList1").find("li").eq(3).trigger("click");
             });
             /**
              * 套餐默认选中价格,点击支付弹出二维码支付框

@@ -1,4 +1,4 @@
-var ourURL = "http://api2.bohe.com";
+var ourURL = "https://hkapi.bohe.com";
 
 $(function () {
     var getLanguage = {
