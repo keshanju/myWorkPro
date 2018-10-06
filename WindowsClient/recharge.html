@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html data-lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/layer.css">
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/jquery.i18n.min.js"></script>
+    <script src="./js/layer.js"></script>
+    <script src="./js/common.js"></script>
+    <title data-lang="recharge_renew">充值续费</title>
+</head>
+
+<body>
+    <!-- 二维码支付弹出框 -->
+    <div class="modals-of-payinstance-BH-Mac photo-show">
+        <div class="top-payfor-BH-Mac">
+            <span data-lang="payment">支付</span>
+            <img src="./img/member-cancel.png" alt="">
+        </div>
+        <div class="order-number-BH">
+            <h4 data-lang="order_number">订单号</h4>
+            <p>01010100010100010010100</p>
+        </div>
+        <div class="erweima-pay-BH">
+            <iframe src="" scrolling="no" frameborder="0"></iframe>
+        </div>
+
+        <p class="invalid-info-BH" data-lang="ff">
+            二维码将在30分钟后失效
+        </p>
+        <h2 class="money-amount-BH">
+            <i>￥</i>
+            <span>360</span>
+        </h2>
+        <div class="please-notice-info-BH">
+            <div class="pay-img-type">
+                <img src="" alt="">
+            </div>
+            <span data-lang="gg">请使用<i>微信</i>扫一扫<br>
+                扫描二维码完成支付
+            </span>
+        </div>
+    </div>
+
+    <!-- 套餐说明弹出框 -->
+    <div class="packages-introduction-BH-Mac photo-show">
+        <div class="top-packages-introduction-BH-Mac">
+            <span data-lang="Package_instructions">套餐说明</span>
+            <img src="./img/member-cancel.png" alt="">
+        </div>
+        <div class="bottom-details-packages-BH-Mac">
+            <p data-lang="hh">"包月套餐"和"计时套餐"不可混合购买, 购买其中一种后,需待购买的套餐用完, 方可购买另外一种套餐。</p>
+            <p data-lang="ii">如想中途换套餐, 可使用"套餐转换"功能, 进行套餐间的转换。一个月仅限转换一次。</p>
+        </div>
+    </div>
+
+    <!-- 套餐模块 -->
+    <div class="packages-BH-Mac">
+        <span data-lang="Package" class="package-words-BH">套餐</span>
+        <!-- 获取后台数据动态渲染 -->
+        <ul class="wrap-packages-BH-mac">
+
+        </ul>
+
+        <div class="instrucment-packages">
+            <img src="./img/package-info.png" alt="">
+            <span data-lang="Package_instructions">套餐说明</span>
+        </div>
+    </div>
+
+    <!-- 价格模块 -->
+    <div class="price-BH-Mac">
+        <span data-lang="price" class="price-words-BH">价格</span>
+        <div class="wrap-price-BH-Mac">
+
+        </div>
+    </div>
+
+    <!-- 折扣码模块 -->
+    <div class="discound-BH-Mac">
+        <span data-lang="discount_codes" class="discount-code-words-BH">折扣码</span>
+        <div class="input-text-BH">
+            <input type="text" placeholder="请输入" id="discount_code_info">
+            <span data-lang="jj">没有则不填</span>
+        </div>
+    </div>
+
+    <!-- 金额模块 -->
+    <div class="sum-BH-Mac">
+        <span data-lang="sum">金额</span>
+        <h2 class="whole-amount-BH"><i>￥</i><b class="amount-words-BH">0.00</b></h2>
+    </div>
+
+    <!-- 支付方式模块 -->
+    <div class="payments-BH-Mac">
+        <span data-lang="pay" class="pay-words-BH">支付</span>
+        <ul class="payways-of-packages">
+            <li class="chose" id="1" data-lang="wechat">
+                微信
+                <img src="./img/chose.png" alt="">
+            </li>
+            <li id="2" data-lang="alipay">
+                支付宝
+                <img src="./img/chose.png" alt="" class="photo-show">
+            </li>
+            <li id="5">
+                Paypal
+                <img src="./img/chose.png" alt="" class="photo-show">
+            </li>
+        </ul>
+    </div>
+
+    <!-- 立即支付 -->
+    <div class="pay-bottom-BH-Mac">
+        <div class="pay-instance-BH-Mac" data-lang="Check_out">
+            立即支付
+        </div>
+        <div class="auto-pay-BH-Mac" style="display:none">
+            <!-- <h3></h3>
+            <span data-lang="auto_renew">到期自动续费</span> -->
+        </div>
+    </div>
+
+    <div class="BH-Mac-version">
+        <p>version</p>
+    </div>
+    <script>
+        var pay_type,
+            package_id,
+            price_id,
+            package_id2,
+            timer,
+            billing_type,
+            pay_url,
+            discount_code,
+            is_switch_package;
+        var no_login_code = 400006;
+
+        //本页面封装的调用接口的方法
+        var rechargeFee = {
+            //获取用户详细信息
+            getUserInfo: function (json, callback) {
+                $.ajax({
+                    type: 'post',
+                    url: ourURL + '/api/user/info',
+                    data: json,
+                    success: callback
+                });
+            },
+            //获取可见套餐详细信息
+            getPackageInfo: function (json, callback) {
+                $.ajax({
+                    type: "post",
+                    url: ourURL + "/api/user/package",
+                    data: json,
+                    success: callback
+                })
+            },
+            //获取订单状态的详细信息
+            getInvoiceStatus: function (json, callback) {
+                $.ajax({
+                    type: "post",
+                    url: ourURL + "/api/user/invoice/state",
+                    data: json,
+                    success: callback
+                })
+            },
+            //获取订单列表内订单的详细信息
+            getInvoiceInfo: function (json, callback) {
+                $.ajax({
+                    type: "post",
+                    url: ourURL + "/api/user/invoice/buy",
+                    data: json,
+                    success: callback
+                })
+            },
+            //获取购买套餐的详细信息
+            getPackageBuy: function (json, callback) {
+                $.ajax({
+                    type: "post",
+                    url: ourURL + "/api/user/package/buy",
+                    data: json,
+                    success: callback
+                })
+            },
+
+
+            /**获取url 中的参数
+             * @param {String} name
+             */
+            getUrlParam: function (name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+                var r = window.location.search.substr(1).match(reg); //匹配目标参数
+                if (r != null) return unescape(r[2]);
+                return null; //返回参数值
+            },
+
+        }
+        
+        $(function () {
+            $("#discount_code_info").attr("placeholder",LANG["discount_code_info"])
+            //获取到地址栏的token和版本信息
+            var account_token = rechargeFee.getUrlParam("account_token");
+            var version_info = rechargeFee.getUrlParam("version");
+            $(".BH-Mac-version").find("p").text(version_info);
+            // 登录成功
+            if (account_token) {
+                //用户登录后的个人信息
+                rechargeFee.getUserInfo({
+                    account_token: account_token
+                }, function (res) {
+                    if (res.code == 0) {
+                        is_switch_package = res.data.is_switch_package;
+                        billing_type = res.data.billing_type;
+                        package_id2 = res.data.package_id;//用户当前的套餐id
+                    } else if (res.code == no_login_code) {
+                        layer.msg(LANG["expried_info"])
+                    } else {
+                        layer.msg(res.msg)
+                    }
+                }),
+                    //用户登陆后，显示可见套餐信息
+                    rechargeFee.getPackageInfo({
+                        account_token: account_token
+                    }, function (res) {
+                        if (res.code == 0) {
+                            var aa = res.data;
+                            var index = 0;
+                            $.each(aa, function (k, v) {
+                                var package_id1 = v.package_id;//遍历的套餐id
+                                var curPacId = 'pac' + package_id1;
+                                var alis = "<li id=" + curPacId + " data-id=" + package_id1 + ">" + v.package_title +
+                                    "<img src=\"./img/chose.png\" alt=\"\" class=\"photo-show\" ></li>";
+                                $(".wrap-packages-BH-mac").append(alis);
+                                var bb = v.price;
+                                var culs = "<ul id=priceList" + index + "></ul>";
+                                $(".wrap-price-BH-Mac").append(culs);
+                                $.each(bb, function (k, v) {
+                                    var price_id = v.price_id;
+                                    var price = parseInt(v.price_num);
+                                    var blis = "<li data-id=" + price_id + "><p>" + v.price_title +
+                                        "</p><h2><i>￥</i><span class=\"abcd\">" + price +
+                                        "</span></h2><img src = \"./img/chose.png\" class=\"photo-show\"><span class=\"discount-of-packages-BH-Mac\">" +
+                                        v.price_short_desc + "</span></li>";
+                                    var ulId = "#priceList" + index;
+                                    $(ulId).append(blis);
+                                });
+                                index++;
+                            });
+                            //加一个判断。页面刷新时，自动点击当前购已购买的套餐
+                            if (billing_type == 1) {
+                                $(".wrap-packages-BH-mac").find("li").eq(1).trigger("click");
+                            } else if (billing_type == 2) {
+                                $(".wrap-packages-BH-mac").find("li").eq(0).trigger("click");
+                            }
+
+                            $("#priceList0").find("li").eq(0).trigger("click");
+                            $("#priceList1").find("li").eq(3).trigger("click");
+                            $(".payways-of-packages").find("li").eq(0).trigger("click");
+
+                            // 做两层判断，通过is_switch_package 判断是否可以购买两种套餐，通过billing_type 的值判断只能购买当前套餐，其他套餐能购买
+                            if (is_switch_package == 0) {
+                                var curPacId = '#pac' + package_id2;
+                                $(".wrap-packages-BH-mac").find(curPacId).removeClass("disabled").siblings("li").addClass("disabled")
+                            }
+
+
+                        } else if (res.code == no_login_code) {
+                            layer.msg(LANG["expried_info"]);
+                        } else {
+                            layer.msg(res.msg);
+                        }
+                    })
+            }
+            /**
+             * 套餐购买以及订单支付
+             */
+            $(".wrap-packages-BH-mac").on("click", "li", function () {
+                //阻止跳转
+                if ($(this).hasClass("disabled")) {
+                    return false;
+                }
+                package_id = $(this).attr("data-id"); //获取当前点击的套餐id
+                //获取当前点击的li的索引值,因为下面判断的时候要用，所以将该变量设置为全局的
+                var index = $(this).index();
+                // 默认点击切换套餐的时候，让 每个套餐下的的第一个详细套餐被选中，自动执行事件，对当前的点击的li的index值进行判断，如果满足则自动执行click事件，为当前的第一个子元素加上对应的样式
+                $(".wrap-price-BH-Mac ul").eq(index).show().siblings().hide();
+                $(this).find("img").removeClass("photo-show");
+                $(this).siblings().find("img").addClass("photo-show");
+                $(this).addClass("chose").siblings().removeClass("chose");
+                $("#priceList0").find("li").eq(0).trigger("click");
+                $("#priceList1").find("li").eq(3).trigger("click");
+
+
+                
+            });
+            /**
+             * 套餐默认选中价格,点击支付弹出二维码支付框
+             */
+            $(".wrap-price-BH-Mac").on("click", "li:visible", function () {
+                price_id = $(this).attr("data-id");
+                var defaluts_buy = $(this).find(".abcd").text();
+                $(".whole-amount-BH").find("b").text(defaluts_buy);
+                // 点击当前li添加li其余li移除chose
+                $(this).addClass("chose").siblings().removeClass("chose");
+                //点击当前添加选中背景图，其余li移除背景图
+                $(this).find("img").removeClass("photo-show");
+                $(this).siblings().find("img").addClass("photo-show");
+            });
+            /**
+             * 支付方式选择
+             */
+            $(".payments-BH-Mac ul").on("click", "li", function () {
+                // 获取到支付方式的id，然后判断是否为PayPal支付类型，如果是则显示自动续费框，否则不显示(&& (index == 0 || index == 1) )
+                pay_type = $(this).attr("id");
+                if (pay_type == 5) {
+                    $(".auto-pay-BH-Mac").show();
+                } else {
+                    $(".auto-pay-BH-Mac").hide();
+                } pay_type = $(this).attr("id");
+                if (pay_type == 5) {
+                    $(".auto-pay-BH-Mac").show();
+                } else {
+                    $(".auto-pay-BH-Mac").hide();
+                }
+                // 点击切换背景图片，当前项添加chose样式，其余项移除样式
+                $(this).addClass("chose").siblings().removeClass("chose");
+                //是否添加选中的背景图片
+                $(this).find("img").removeClass("photo-show");
+                $(this).siblings().find("img").addClass("photo-show");
+            });
+
+            $("#discount_code_info").change(function(){
+                discount_code = $(this).val();
+            });
+
+            /**
+             *点击购买与支付
+             */
+            $(".pay-instance-BH-Mac").on("click", function () {
+                // 调用支付接口
+                rechargeFee.getPackageBuy({
+                    account_token: account_token,
+                    package_id: package_id,
+                    price_id: price_id,
+                    pay_type: pay_type,
+                    invoice_from: 1,
+                    width: 105,
+                    discount_code:discount_code
+                }, function (res) {
+                    if (res.code == 0) {
+                        pay_url = res.data.pay_url;
+                        //定义变量以获取后台返回的参数值
+                        var pay_price = parseInt(res.data.amount);
+                        var order_number = res.data.order_no;
+                        var invoice_id = res.data.invoice_id;
+                        if (pay_type == 1) { //微信支付,显示微信的扫码信息
+                            // 显示二维码支付弹框
+                            $("body").find(".modals-of-payinstance-BH-Mac").show();
+                            // 支付框显示支付方式
+                            var payways = $(".payways-of-packages li.chose").text();
+                            $(".please-notice-info-BH span").find("i").text(payways);
+                            $(".pay-img-type").find("img").attr("src", "./img/saoma-wechat.png");
+                            $(".money-amount-BH").css("color", "#02C800");
+                        } else if (pay_type == 2) { //支付宝支付，显示微信的扫码信息
+                            // 显示二维码支付弹框
+                            $("body").find(".modals-of-payinstance-BH-Mac").show();
+                            // 支付框显示支付方式
+                            var payways = $(".payways-of-packages li.chose").text();
+                            $(".please-notice-info-BH span").find("i").text(payways);
+                            $(".pay-img-type").find("img").attr("src", "./img/saoma-ali.png");
+                            $(".money-amount-BH").css("color", "#43AEFA");
+                        } else if (pay_type == 5) {
+                            console.log(pay_url);
+                            window.open(pay_url)
+                        }
+                        //赋值给页面上的标签
+                        $(".order-number-BH").find("p").text(order_number);
+                        $(".money-amount-BH").find("span").text(pay_price);
+                        $(".erweima-pay-BH").find("iframe").attr("src", pay_url);
+
+                        // 设置定时器，定时更新订单的状态值
+                        timer = setInterval(function () {
+                            //调用订单状态值的接口，定时刷新订单的状态值
+                            rechargeFee.getInvoiceStatus({
+                                account_token: account_token,
+                                invoice_id: invoice_id
+                            }, function (res) {
+                                if (res.code == 0) {
+                                    var status = res.data.status;
+                                    if (status == 1) {
+                                        layer.msg(LANG["pay_success_info"]);
+                                        location.href = 'index.html'+location.search;
+                                    }
+                                } else if (res.code == no_login_code) {
+                                    layer.msg(LANG["expried_info"]);
+                                } else {
+                                    layer.msgs(res.msg);
+                                }
+                            });
+                        }, 3000);
+                    } else if (res.code == no_login_code) {
+                        layer.msg(LANG["expried_info"]);
+                    } else {
+                        layer.msg(res.msg);
+                    }
+                });
+
+            });
+
+            //取消支付，关闭支付弹框，清除定时器
+            $(".top-payfor-BH-Mac").find("img").on("click", function () {
+                $("body").find(".modals-of-payinstance-BH-Mac").hide();
+                clearInterval(timer);
+            });
+
+            $(".auto-pay-BH-Mac").on("click", function () {
+                $(this).find("h3").toggleClass("change-active");
+            });
+
+            $(".instrucment-packages").on("click", function () {
+                $("body").find(".packages-introduction-BH-Mac").show();
+            });
+
+            $(".packages-introduction-BH-Mac").on("mouseleave", function () {
+                $("body").find(".packages-introduction-BH-Mac").hide();
+            });
+
+            $(".top-packages-introduction-BH-Mac").find("img").on("click", function () {
+                $("body").find(".packages-introduction-BH-Mac").hide();
+            });
+        })
+
+    </script>
+</body>
+
+</html>

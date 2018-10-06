@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html data-lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/jquery.i18n.min.js"></script>
+    <script src="./js/common.js"></script>
+    <title data-lang="kefu">客服中心</title>
+</head>
+<body>
+    <div class="service-center-BH-Mac">
+        <ul>
+            <li>
+                <img src="./img/service-center.png" alt="">
+            </li>
+            <li class="connect-custumers">
+                <h3 data-lang="kk">BOHE客服 竭诚为您服务</h3>
+                <!-- <a href="javascript:;" id="contact_service" data-lang="ll">联系客服</a> -->
+                <!-- <h4 class="consult-time" data-lang="working_time">咨询时间: 9:00~24:00</h4> -->
+                <p data-lang="mm">遇到困难, 请给我们送邮件<br>我们会尽快回复您</p>
+                <span>customer@bohe.com</span>
+            </li>
+        </ul>
+    </div>
+    <!-- <div class="connect-ways-BH-Mac">
+        <div class="logo-and-offical-website">
+            <img src="./img/service-center-logo.png" alt="">
+            <span id="offical_net">官方网站</span>
+        </div>
+        <div class="service-phone">
+            客服电话: 021-32546342
+        </div>
+        <div class="consult-time">
+            咨询时间: 9:00~18:00   
+        </div>
+    </div> -->
+    <!-- 定位的版本信息盒子 ，到时候由客户端调用接口进行渲染-->
+    <div class="BH-Mac-version">
+        <p>Ver:1.1.1.1</p>
+    </div>
+    <script>
+        var service = {
+            /**获取url 中的参数
+             * @param {String} name
+             */
+             getUrlParam: function (name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+                var r = window.location.search.substr(1).match(reg); //匹配目标参数
+                if (r != null) return unescape(r[2]);
+                return null; //返回参数值
+            },
+        }
+        //获取版本信息
+        var version_info = service.getUrlParam("version");
+        $(".BH-Mac-version").find("p").text(version_info);
+        
+        // 点击调到客服中心
+        $("#contact_service").on("click", function () {
+            var message = {
+                'method' : 'hello',
+                'param1' : 'liuyanwei'
+            };
+            window.webkit.messageHandlers.gotoServiceCenter.postMessage(message);
+        });
+
+        $("#offical_net").on("click", function () {
+            var message = {
+                'method' : 'hello',
+                'param1' : 'liuyanwei'
+            };
+            window.webkit.messageHandlers.gotoOfficalNet.postMessage(message);
+        })
+    </script>
+</body>
+</html>

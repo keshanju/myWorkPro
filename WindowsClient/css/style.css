@@ -1,0 +1,1329 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+ul {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+html {
+  background: #000;
+}
+.chose {
+  position: relative;
+  border: 1px solid #DE394A!important;
+}
+.chose img {
+  width: 14px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: block;
+}
+.disabled {
+  background: #999999;
+  color: #999999;
+}
+.photo-show {
+  display: none;
+}
+body {
+  font-family: 'Microsoft YaHei';
+  background: #4F596D;
+  width: 511px;
+  height: 371px;
+  position: fixed;
+  /*
+    
+    会员中心页面
+
+    */
+  /*
+    
+    充值续费页面
+
+    */
+  /*
+    
+    套餐转换页面
+    
+    */
+  /*
+    
+    客服中心
+    
+    */
+}
+body .edit-photo-BH {
+  width: 325px;
+  height: 358px;
+  margin: 0 auto;
+  background: #FFF;
+  position: absolute;
+  left: 0;
+  top: 21px;
+  z-index: 333;
+}
+body .edit-photo-BH .top-edit-info-BH {
+  margin: 6px 9px 0 9px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+body .edit-photo-BH .top-edit-info-BH span {
+  font-size: 12px;
+  color: #4F596D;
+  letter-spacing: 0.75px;
+}
+body .edit-photo-BH .top-edit-info-BH img {
+  width: 8px;
+  cursor: pointer;
+}
+body .edit-photo-BH .upload-photo-BH {
+  margin: 41px 72px 0 83px;
+}
+body .edit-photo-BH .upload-photo-BH .popHeadImg {
+  text-align: center;
+  background: #FFF;
+}
+body .edit-photo-BH .upload-photo-BH .popHeadImg img {
+  width: 170px;
+  height: 170px;
+}
+body .edit-photo-BH .upload-photo-BH .resize-photo-BH {
+  width: 170px;
+  height: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+body .edit-photo-BH .upload-photo-BH .resize-photo-BH .shink-member-BH {
+  width: 13px;
+}
+body .edit-photo-BH .upload-photo-BH .resize-photo-BH .scroll-control {
+  width: 137px;
+  height: 8px;
+  background: #E2E7F1;
+  border: 1px solid #AEB8CB;
+  border-radius: 10px;
+  position: relative;
+}
+body .edit-photo-BH .upload-photo-BH .resize-photo-BH .scroll-control .slide-block-BH {
+  width: 18px;
+  height: 8px;
+  background: #4F596D;
+  border-radius: 10px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%);
+}
+body .edit-photo-BH .upload-photo-BH .resize-photo-BH .enlarge-member-BH {
+  width: 13px;
+}
+body .edit-photo-BH .button-of-confirm {
+  font-size: 16px;
+  letter-spacing: 1px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 191px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  overflow: hidden;
+  margin: 27px 62px 45px 72px;
+  position: relative;
+}
+body .edit-photo-BH .button-of-confirm .upload-img-BH {
+  width: 90px;
+  height: 28px;
+  background: #4F596D;
+  display: block;
+  border-radius: 2px;
+  outline: none;
+  border: none;
+  color: #FFFFFF;
+  cursor: pointer;
+}
+body .edit-photo-BH .button-of-confirm input {
+  opacity: 0;
+  width: 90px;
+  height: 30px;
+  position: absolute;
+  left: 0;
+  top:0;
+}
+body .edit-photo-BH .button-of-confirm .be-sure-to {
+  width: 90px;
+  height: 30px;
+  background: #4F596D;
+  border-radius: 2px;
+  display: block;
+  color: #FFFFFF;
+  cursor: pointer;
+}
+body .modals-of-payinstance-BH-Mac {
+  width: 325px;
+  height: 358px;
+  border-radius: 2px;
+  background: #FFF;
+  position: absolute;
+  left: 0;
+  top: 21px;
+  z-index: 333;
+}
+body .modals-of-payinstance-BH-Mac .top-payfor-BH-Mac {
+  margin: 6px 10px 20px 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+body .modals-of-payinstance-BH-Mac .top-payfor-BH-Mac span {
+  /* width: 26px;
+  height: 16px; */
+  font-size: 12px;
+  color: #4F596D;
+  letter-spacing: 0.75px;
+}
+body .modals-of-payinstance-BH-Mac .top-payfor-BH-Mac img {
+  width: 8px;
+}
+body .modals-of-payinstance-BH-Mac .order-number-BH {
+  margin: 0 auto;
+  font-size: 12px;
+  color: #666666;
+  letter-spacing: -0.04px;
+}
+body .modals-of-payinstance-BH-Mac .order-number-BH h4 {
+  text-align: center;
+}
+body .modals-of-payinstance-BH-Mac .order-number-BH p {
+  text-align: center;
+}
+body .modals-of-payinstance-BH-Mac .erweima-pay-BH {
+  margin: 0 auto;
+  text-align: center;
+  display: block;
+  width: 105px;
+}
+body .modals-of-payinstance-BH-Mac .erweima-pay-BH iframe {
+  text-align: center;
+  width: 105px;
+  height: 105px;
+}
+body .modals-of-payinstance-BH-Mac .invalid-info-BH {
+  font-size: 12px;
+  color: #777777;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+body .modals-of-payinstance-BH-Mac .money-amount-BH {
+  height: 40px;
+  margin: 11px auto;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 31px;
+  color: #02C800;
+}
+body .modals-of-payinstance-BH-Mac .money-amount-BH span {
+  font-weight: Bold;
+  font-size: 30px;
+  letter-spacing: 1px;
+}
+body .modals-of-payinstance-BH-Mac .money-amount-BH i {
+  font-style: normal;
+  font-size: 24px;
+}
+body .modals-of-payinstance-BH-Mac .please-notice-info-BH {
+  margin: 0 auto;
+  width: 80%;
+  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+body .modals-of-payinstance-BH-Mac .please-notice-info-BH .pay-img-type {
+  text-align: center;
+}
+body .modals-of-payinstance-BH-Mac .please-notice-info-BH .pay-img-type img {
+  width: 28px;
+  height: 28px;
+  margin-right: 11px;
+  vertical-align: middle;
+}
+body .modals-of-payinstance-BH-Mac .please-notice-info-BH span {
+  height: 32px;
+  font-size: 12px;
+  color: #999999;
+  text-align: left;
+}
+body .modals-of-payinstance-BH-Mac .please-notice-info-BH span i {
+  font-size: 12px;
+  font-style: normal;
+  letter-spacing: 0.65px;
+  margin: 0 -5px;
+}
+body .packages-introduction-BH-Mac {
+  width: 325px;
+  height: 204px;
+  background: #FFF;
+  position: absolute;
+  left: 14px;
+  top: 98px;
+  z-index: 333;
+}
+body .packages-introduction-BH-Mac .top-packages-introduction-BH-Mac {
+  margin: 6px 9px 30px 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+body .packages-introduction-BH-Mac .top-packages-introduction-BH-Mac span {
+  font-size: 12px;
+  color: #4F596D;
+  letter-spacing: 0.75px;
+}
+body .packages-introduction-BH-Mac .top-packages-introduction-BH-Mac img {
+  width: 8px;
+}
+body .packages-introduction-BH-Mac .bottom-details-packages-BH-Mac {
+  margin: 0 19px 0 19px;
+}
+body .packages-introduction-BH-Mac .bottom-details-packages-BH-Mac p {
+  text-indent: 30px;
+  width: 287px;
+  font-size: 14px;
+  color: #4F596D;
+  letter-spacing: -0.05px;
+  text-align: justify;
+  margin-bottom: 20px;
+}
+body .packages-transform-BH-Mac {
+  width: 325px;
+  height: 204px;
+  background: #FFF;
+  position: absolute;
+  left: 14px;
+  top: 98px;
+  z-index: 333;
+}
+body .packages-transform-BH-Mac .top-packages-transform-BH-Mac {
+  margin: 6px 9px 30px 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+body .packages-transform-BH-Mac .top-packages-transform-BH-Mac span {
+  font-size: 12px;
+  color: #4F596D;
+  letter-spacing: 0.75px;
+}
+body .packages-transform-BH-Mac .top-packages-transform-BH-Mac img {
+  width: 8px;
+}
+body .packages-transform-BH-Mac .wrap-one-packages-transform-BH .center-packages-transform-BH-Mac {
+  margin: 0 19px 49px 19px;
+}
+body .packages-transform-BH-Mac .wrap-one-packages-transform-BH .center-packages-transform-BH-Mac p {
+  font-size: 14px;
+  line-height: 22PX;
+  color: #4F596D;
+  letter-spacing: -0.05px;
+  text-align: center;
+  line-height: 22px;
+}
+body .packages-transform-BH-Mac .wrap-one-packages-transform-BH .center-packages-transform-BH-Mac p i {
+  font-style: normal;
+  font-size: 14px;
+  color: #DE394A ;
+  letter-spacing: -0.05px;
+  text-align: center;
+  line-height: 22px;
+}
+body .packages-transform-BH-Mac .wrap-one-packages-transform-BH .bottom-packages-transform-BH-Mac {
+  margin: 0 auto;
+  width: 92px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  background: #4F596D;
+  border-radius: 2px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #FFFFFF;
+  letter-spacing: 1px;
+}
+body .packages-transform-BH-Mac .wrap-one-packages-transform-BH .bottom-packages-transform-BH-Mac a {
+  text-decoration: none;
+  color: #fff;
+}
+body .packages-transform-BH-Mac .wrap-one-packages-transform-BH .bottom-packages-transform-BH-Mac:hover {
+  background: #3A4253;
+}
+body .packages-transform-BH-Mac .wrap-two-packages-transform-BH {
+  margin: 0 79px 4px 80px;
+  padding-top: 6px;
+  text-align: center;
+}
+body .packages-transform-BH-Mac .wrap-two-packages-transform-BH img {
+  width: 32px;
+  margin-bottom: 4px;
+}
+body .packages-transform-BH-Mac .wrap-two-packages-transform-BH h3 {
+  font-size: 14px;
+  color: #3E4758;
+  letter-spacing: 0.88px;
+  margin-bottom: 1px;
+}
+body .packages-transform-BH-Mac .wrap-two-packages-transform-BH p {
+  font-size: 12px;
+  color: #8F9EB9;
+  letter-spacing: 0.75px;
+  margin-bottom: 20px;
+}
+body .packages-transform-BH-Mac .wrap-two-packages-transform-BH a {
+  width: 92px;
+  height: 30px;
+  display: inline-block;
+  line-height: 30px;
+  font-size: 16px;
+  color: #FFFFFF;
+  letter-spacing: 1px;
+  background: #4F596D;
+  border-radius: 2px;
+}
+body .packages-transform-BH-Mac .wrap-two-packages-transform-BH a:hover {
+  background: #3A4253;
+}
+body .BH-Mac-version {
+  position: absolute;
+  top: 6px;
+  right: 14px;
+  height: 16px;
+  line-height: 16px;
+  font-family: lighter;
+  font-size: 12px;
+  color: #FFFFFF;
+  letter-spacing: -0.09px;
+}
+body .BH-Mac-member-top {
+  width: 471px;
+  padding-top: 33px;
+  box-sizing: border-box;
+  height: 106px;
+  margin-left: 21px;
+}
+body .BH-Mac-member-top .wrap-of-member-top {
+  width: 471px;
+  border-bottom: 1px solid #5A667C;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+body .BH-Mac-member-top .wrap-of-member-top .user-info-details {
+  width: 80%;
+  height: 58px;
+  margin-bottom: 15px;
+  overflow: hidden;
+}
+body .BH-Mac-member-top .wrap-of-member-top .user-info-details .wrap-camera-show {
+  float: left;
+  position: relative;
+  width: 58px;
+  height: 58px;
+  margin-right: 11px;
+}
+body .BH-Mac-member-top .wrap-of-member-top .user-info-details .wrap-camera-show .camera-show {
+  display: block;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+}
+body .BH-Mac-member-top .wrap-of-member-top .user-info-details .wrap-camera-show .camera-show img {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+}
+body .BH-Mac-member-top .wrap-of-member-top .user-info-details .wrap-camera-show .wrap-img-show {
+  display: block;
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  display: -webkit-flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+}
+body .BH-Mac-member-top .wrap-of-member-top .user-info-details .wrap-camera-show .wrap-img-show img {
+  width: 29.2px;
+  height: 22.7px;
+  vertical-align: middle;
+}
+body .BH-Mac-member-top .wrap-of-member-top .user-info-details .member-info {
+  float: left;
+  width: 240px;
+  height: 58px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+}
+body .BH-Mac-member-top .wrap-of-member-top .user-info-details .member-info .top-of-user-info-BH-Mac {
+  height: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+body .BH-Mac-member-top .wrap-of-member-top .user-info-details .member-info .top-of-user-info-BH-Mac .change-nickname {
+  font-size: 14px;
+  font-weight: bold;
+  color: #FFFFFF;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  margin-right: 15px;
+}
+body .BH-Mac-member-top .wrap-of-member-top .user-info-details .member-info .top-of-user-info-BH-Mac img {
+  width: 14px;
+  height: 14px;
+  vertical-align: middle;
+}
+body .BH-Mac-member-top .wrap-of-member-top .user-info-details .member-info .top-of-user-info-BH-Mac img:hover {
+  background: url(../img/member-edit-hover.png) no-repeat center center;
+  background-size: 100% 100%;
+}
+body .BH-Mac-member-top .wrap-of-member-top .user-info-details .member-info .edit-nickname-BH {
+  padding: 0 5px 0 4px;
+  height: 20px;
+  line-height: 20px;
+  background: #303745;
+  border-radius: 2px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 240px;
+}
+body .BH-Mac-member-top .wrap-of-member-top .user-info-details .member-info .edit-nickname-BH input {
+  width: 240px;
+  height: 16px;
+  outline: none;
+  border: 0;
+  background: #303745;
+  color: #8F9EB9;
+}
+body .BH-Mac-member-top .wrap-of-member-top .user-info-details .member-info .edit-nickname-BH input::placeholder {
+  font-size: 12px;
+  color: #8F9EB9;
+  letter-spacing: 0.75px;
+}
+body .BH-Mac-member-top .wrap-of-member-top .user-info-details .member-info .edit-show {
+  display: none;
+}
+body .BH-Mac-member-top .wrap-of-member-top .user-info-details .member-info .bottom-of-user-info-BH-Mac {
+  margin-top: 8px;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+body .BH-Mac-member-top .wrap-of-member-top .user-info-details .member-info .bottom-of-user-info-BH-Mac a {
+  width: 38px;
+  height: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 20px;
+  text-align: center;
+  font-size: 12px;
+  border-radius: 42px;
+  color: #FFFFFF;
+  background: #13ADCF;
+  margin-right: 9px;
+}
+body .BH-Mac-member-top .wrap-of-member-top .user-info-details .member-info .bottom-of-user-info-BH-Mac #surplus-time {
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 80%;
+  font-size: 12px;
+  color: #8F9EB9;
+}
+body .BH-Mac-member-top .wrap-of-member-top .user-info-details .member-info .bottom-of-user-info-BH-Mac #surplus-time:hover {
+  opacity: 0.8;
+}
+body .BH-Mac-member-top .wrap-of-member-top .recharge-on {
+  width: 85px;
+  border-radius: 2px;
+  background-color: #FFB656;
+  line-height: 34px;
+  text-align: center;
+  height: 34px;
+}
+body .BH-Mac-member-top .wrap-of-member-top .recharge-on .vip-recharge {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  z-index: 12;
+}
+body .BH-Mac-member-top .wrap-of-member-top .recharge-on .vip-recharge img {
+  border: 0;
+  width: 16px;
+  height: 14px;
+  margin-right: 5px;
+}
+body .BH-Mac-member-top .wrap-of-member-top .recharge-on .vip-recharge h2 {
+  font-size: 14px;
+  color: #FFFFFF;
+}
+body .BH-Mac-member-top .wrap-of-member-top .recharge-on .vip-recharge:hover {
+  background: #EAA243;
+}
+body .BH-Mac-member-center {
+  width: 471px;
+  margin: 17px 20px 0 21px;
+  overflow: hidden;
+}
+body .BH-Mac-member-center .list-one-BH {
+  float: left;
+  width: 223px;
+  margin-right: 25px;
+}
+body .BH-Mac-member-center .list-one-BH .offical-declear {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  text-align: left;
+  margin-bottom: 7px;
+}
+body .BH-Mac-member-center .list-one-BH .offical-declear img {
+  width: 12px;
+  margin-right: 4px;
+  vertical-align: middle;
+}
+body .BH-Mac-member-center .list-one-BH .offical-declear h3 {
+  font-size: 12px;
+  line-height: 16px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  height: 16px;
+  font-weight: normal;
+  letter-spacing: -0.09px;
+  color: #FFFFFF;
+}
+body .BH-Mac-member-center .list-one-BH .explain-info li {
+  font-size: 12px;
+  overflow: hidden;
+  margin-bottom: 3px;
+}
+body .BH-Mac-member-center .list-one-BH .explain-info li p {
+  float: left;
+  white-space: nowrap;
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  font-size: 12px;
+  color: #8F9EB9;
+}
+body .BH-Mac-member-center .list-one-BH .explain-info li p:hover {
+  color: #BACCEC;
+  cursor: pointer;
+}
+body .BH-Mac-member-center .list-one-BH .explain-info li span {
+  width: 20%;
+  float: right;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  color: #8F9EB9;
+}
+body .BH-Mac-member-center .list-one-BH .explain-info li span:hover {
+  color: #BACCEC;
+}
+body .BH-Mac-member-center .list-two-BH {
+  float: left;
+  width: 223px;
+  margin-right: 0;
+}
+body .BH-Mac-member-center .list-two-BH .normal-questions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  text-align: left;
+  margin-bottom: 7px;
+}
+body .BH-Mac-member-center .list-two-BH .normal-questions img {
+  margin-right: 4px;
+  width: 12px;
+  vertical-align: middle;
+}
+body .BH-Mac-member-center .list-two-BH .normal-questions h3 {
+  font-size: 12px;
+  line-height: 16px;
+  height: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: normal;
+  letter-spacing: -0.09px;
+  color: #FFFFFF;
+}
+body .BH-Mac-member-center .list-two-BH .recover-info li {
+  font-size: 12px;
+  color: #8F9EB9;
+  overflow: hidden;
+  margin-bottom: 3px;
+}
+body .BH-Mac-member-center .list-two-BH .recover-info li p {
+  width: 100%;
+  float: left;
+  white-space: nowrap;
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  font-size: 12px;
+  color: #8F9EB9;
+}
+body .BH-Mac-member-center .list-two-BH .recover-info li p a{
+  color: #8F9EB9!important;
+}
+body .BH-Mac-member-center .list-two-BH .recover-info li p:hover {
+  color: #BACCEC;
+  cursor: pointer;
+}
+body .BH-Mac-member-bottom {
+  width: 471px;
+  margin-right: 20px;
+  margin-left: 21px;
+}
+body .BH-Mac-member-bottom .activity-area {
+  margin-top: 14px;
+  margin-bottom: 10px;
+  text-align: left;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+body .BH-Mac-member-bottom .activity-area img {
+  width: 12px;
+  vertical-align: middle;
+  margin-right: 4px;
+}
+body .BH-Mac-member-bottom .activity-area h3 {
+  font-size: 12px;
+  line-height: 16px;
+  height: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: normal;
+  letter-spacing: -0.09px;
+  color: #FFFFFF;
+}
+body .BH-Mac-member-bottom .advertisement-imgs {
+  width: 100%;
+  background: #5D6A82;
+  border-radius: 2px;
+}
+body .BH-Mac-member-bottom .advertisement-imgs li {
+  /* float: left; */
+  /* width: 226px; */
+  text-align: center;
+  height: 80px;
+  /* line-height: 98px; */
+  /* margin-right: 14px; */
+  margin: 0 auto;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* body .BH-Mac-member-bottom .advertisement-imgs li img {
+  display: inline-block;
+} */
+body .BH-Mac-member-bottom .advertisement-imgs li span {
+  color: #BACCEC;
+  display: inline-block;
+}
+body .BH-Mac-member-bottom .advertisement-imgs li:nth-child(2) {
+  margin-right: 0;
+}
+body .packages-BH-Mac {
+  width: 478px;
+  margin-left: 33px;
+  font-size: 12px;
+  color: #FFFFFF;
+  letter-spacing: 0.75px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 45px;
+}
+body .packages-BH-Mac ul {
+  margin-left: 20px;
+}
+body .packages-BH-Mac .package-words-BH {
+  width: 40px;
+}
+.price-words-BH {
+  width: 40px;
+}
+.discount-code-words-BH {
+  width: 40px;
+}
+body .packages-BH-Mac ul li {
+  float: left;
+  width: 90px;
+  height: 28px;
+  line-height: 28px;
+  border: 1px solid transparent;
+  text-align: center;
+  margin-right: 8px;
+  border-radius: 2px;
+  background: #303745;
+  cursor: pointer;
+}
+body .packages-BH-Mac ul li:hover {
+  border: 1px solid #DE394A;
+}
+body .packages-BH-Mac .instrucment-packages img {
+  vertical-align: middle;
+  width: 14px;
+  margin-right: 4px;
+}
+body .packages-BH-Mac .instrucment-packages span {
+  font-size: 12px;
+  line-height: 16px;
+  width: 40px;
+}
+body .price-BH-Mac {
+  width: 478px;
+  margin: 15px 0 18px 33px;
+  color: #FFF;
+  font-size: 12px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+body .price-BH-Mac span {
+  letter-spacing: 0.75px;
+}
+body .price-BH-Mac .wrap-price-BH-Mac ul {
+  width: 100%;
+  margin-left: 20px;
+  overflow: hidden;
+  height: 78px;
+  overflow-y: scroll;
+}
+body .price-BH-Mac .wrap-price-BH-Mac ul li {
+  float: left;
+  width: 90px;
+  height: 68px;
+  border: 1px solid transparent;
+  text-align: center;
+  margin-right: 8px;
+  margin-top: 8px;
+  background: #303745;
+  border-radius: 2px;
+  font-weight: 100;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+}
+body .price-BH-Mac .wrap-price-BH-Mac ul li p {
+  color: #8F9EB9;
+  letter-spacing: 0.75px;
+}
+body .price-BH-Mac .wrap-price-BH-Mac ul li h2 {
+  font-weight: 100;
+  color: #FFFFFF;
+}
+body .price-BH-Mac .wrap-price-BH-Mac ul li h2 span {
+  font-size: 24px;
+  letter-spacing: 1.5px;
+}
+body .price-BH-Mac .wrap-price-BH-Mac ul li h2 i {
+  float: left;
+  margin-top: 5px;
+  margin-right: 5px;
+  font-weight: lighter;
+  font-size: 12px;
+  width: 8px;
+  height: 16px;
+  font-style: normal;
+  letter-spacing: 0.75px;
+}
+body .price-BH-Mac .wrap-price-BH-Mac ul li .discount-of-packages-BH-Mac {
+  position: absolute;
+  top: -6px;
+  right: 5px;
+  width: 30px;
+  height: 12px;
+  line-height: 14px;
+  background: #FFB656;
+  font-size: 10px;
+  color: #303745;
+  letter-spacing: 0.62px;
+  border-radius: 7px;
+}
+body .price-BH-Mac .wrap-price-BH-Mac ul li:hover {
+  border: 1px solid #DE394A;
+}
+body .price-BH-Mac .wrap-price-BH-Mac ul li:nth-child(4n) {
+  margin-right: 0;
+}
+body .discound-BH-Mac {
+  width: 478px;
+  margin-left: 33px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 12px;
+}
+body .discound-BH-Mac span {
+  color: #FFFFFF;
+  letter-spacing: 0.75px;
+  margin-right: 20px;
+}
+body .discound-BH-Mac .input-text-BH input {
+  width: 90px;
+  height: 30px;
+  line-height: 30px;
+  text-indent: 1em;
+  border-radius: 2px;
+  color: #8F9EB9;
+  outline: none;
+  border: none;
+  background: #303745;
+}
+body .discound-BH-Mac .input-text-BH input::placeholder {
+  color: #8F9EB9;
+}
+body .discound-BH-Mac .input-text-BH span {
+  margin-left: 8px;
+  color: #8F9EB9;
+}
+body .sum-BH-Mac {
+  width: 478px;
+  margin-left: 33px;
+  color: #FFF;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+body .sum-BH-Mac span {
+  font-size: 12px;
+  width: 40px;
+}
+body .sum-BH-Mac h2 {
+  font-size: 24px;
+  letter-spacing: 1.5px;
+  font-weight: bold;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  margin-left: 20px;
+}
+body .sum-BH-Mac h2 i {
+  float: left;
+  margin-right: 4px;
+  width: 8px;
+  height: 16px;
+  margin-top: 5px;
+  font-weight: 100;
+  font-style: normal;
+  font-size: 12px;
+}
+.amount-words-BH {
+
+}
+body .payments-BH-Mac {
+  width: 478px;
+  margin-left: 33px;
+  color: #FFF;
+  font-size: 12px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+body .payments-BH-Mac span {
+  letter-spacing: 0.75px;
+  width: 40px;
+  margin-right: 25px;
+  /* margin-left: -15px; */
+}
+body .payments-BH-Mac ul {
+  overflow: hidden;
+  width: 100%;
+}
+body .payments-BH-Mac ul .chose {
+  position: relative;
+  border: 1px solid #DE394A;
+}
+body .payments-BH-Mac ul .chose img {
+  width: 14px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+body .payments-BH-Mac ul li {
+  width: 88px;
+  height: 28px;
+  line-height: 28px;
+  border: 1px solid transparent;
+  text-align: center;
+  background: #303745;
+  float: left;
+  margin-right: 8px;
+  cursor: pointer;
+}
+body .payments-BH-Mac ul li:hover {
+  border: 1px solid #DE394A;
+}
+body .pay-bottom-BH-Mac {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 20px 0 21px 84px;
+}
+body .pay-bottom-BH-Mac .pay-instance-BH-Mac {
+  width: 90px;
+  height: 35px;
+  line-height: 35px;
+  margin-left: 8px;
+  background: #DE394A;
+  text-align: center;
+  box-sizing: border-box;
+  border: 1px solid #DE394A;
+  border-radius: 2px;
+  font-size: 12px;
+  color: #FFF;
+  font-family: bold;
+  cursor: pointer;
+}
+body .pay-bottom-BH-Mac .pay-instance-BH-Mac:hover {
+  background: #CB3242;
+}
+body .pay-bottom-BH-Mac .auto-pay-BH-Mac {
+  margin-left: 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+body .pay-bottom-BH-Mac .auto-pay-BH-Mac h3 {
+  width: 14px;
+  height: 14px;
+  background: #303745 url(../img/selected.png) no-repeat center center;
+  background-size: 100% 100%;
+  border-radius: 2px;
+  margin-right: 4px;
+  cursor: pointer;
+}
+body .pay-bottom-BH-Mac .auto-pay-BH-Mac h3.change-active {
+  background: url(../img/selected-defalut.png) no-repeat center center;
+  background-size: 100% 100%;
+}
+body .pay-bottom-BH-Mac .auto-pay-BH-Mac span {
+  font-size: 12px;
+  color: #FFFFFF;
+  letter-spacing: 0.75px;
+}
+body .words-of-translate-BH-Mac {
+  width: 436px;
+  margin-top: 55px;
+  margin-left: 38px;
+  margin-right: 37px;
+  height: 20px;
+  font-size: 14px;
+  color: #FFFFFF;
+  letter-spacing: 0.88px;
+}
+body .translate-package-BH-Mac {
+  margin-top: 14px;
+  margin-left: 38px;
+  margin-right: 38px;
+  width: 436px;
+  height: 60px;
+  background: #606C84;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+body .translate-package-BH-Mac .left-translate-BH-Mac {
+  width: 130px;
+  height: 36px;
+  margin-left: 14px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+body .translate-package-BH-Mac .left-translate-BH-Mac span {
+  text-align: center;
+  line-height: 36px;
+  width: 36px;
+  height: 36px;
+  font-size: 12px;
+  color: #FFF;
+  border-radius: 50%;
+  border: 1px solid #8A97B1;
+}
+body .translate-package-BH-Mac .left-translate-BH-Mac img {
+  margin: 0 12px;
+  width: 19px;
+  height: 13px;
+}
+body .translate-package-BH-Mac .right-translate-BH-Mac {
+  width: 90px;
+  height: 30px;
+  margin-right: 14px;
+  line-height: 30px;
+  text-align: center;
+  font-size: 12px;
+  color: #FFFFFF;
+  letter-spacing: 0.75px;
+  background: #DE394A;
+  border-radius: 2px;
+  cursor: pointer;
+}
+body .translate-package-BH-Mac .right-translate-BH-Mac:hover {
+  background: #CB3242;
+}
+body .instrucitions-of-change {
+  margin-top: 41px;
+  margin-left: 37px;
+  margin-right: 38px;
+  margin-bottom: 5px;
+  /* width: 90px; */
+  height: 16px;
+  font-size: 12px;
+  color: #FFFFFF;
+  letter-spacing: 0.75px;
+}
+body .detail-of-translate-BH-Mac {
+  margin-left: 37px;
+  margin-right: 38px;
+  height: 36px;
+}
+body .detail-of-translate-BH-Mac ul {
+  margin-left: 15px;
+}
+body .detail-of-translate-BH-Mac ul li {
+  list-style: disc;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.75px;
+  color: #8F9EB9;
+}
+body .detail-of-translate-BH-Mac ul li p {
+  text-overflow: ellipsis;
+  /* white-space: nowrap; */
+  overflow: hidden;
+}
+body .service-center-BH-Mac {
+  margin: 75px 44px 59px 55px;
+}
+body .service-center-BH-Mac ul {
+  overflow: hidden;
+}
+body .service-center-BH-Mac ul li {
+  float: left;
+  text-align: center;
+  width: 215px;
+  height: 195px;
+}
+body .service-center-BH-Mac ul li img {
+  width: 215px;
+  height: 195px;
+}
+body .service-center-BH-Mac ul .connect-custumers {
+  width: 197px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+body .service-center-BH-Mac ul .connect-custumers h3 {
+  font-size: 14px;
+  color: #FFFFFF;
+  letter-spacing: 0.88px;
+  margin-bottom: 16px;
+}
+body .service-center-BH-Mac ul .connect-custumers a {
+  font-size: 12px;
+  color: #FFFFFF;
+  letter-spacing: 0.75px;
+  width: 90px;
+  height: 30px;
+  line-height: 30px;
+  background: #DE394A;
+  border-radius: 2px;
+  margin-bottom: 6px;
+}
+body .service-center-BH-Mac ul .connect-custumers a:hover {
+  background: #CB3242;
+}
+body .service-center-BH-Mac ul .connect-custumers .consult-time {
+  font-size: 12px;
+  color: #8F9EB9;
+  letter-spacing: 0.75px;
+}
+body .service-center-BH-Mac ul .connect-custumers p {
+  font-size: 12px;
+  color: #94A9BA;
+  letter-spacing: 0;
+  text-align: center;
+  line-height: 20px;
+}
+body .service-center-BH-Mac ul .connect-custumers span {
+  font-size: 16px;
+  color: #FFFFFF;
+  letter-spacing: 0;
+  line-height: 20px;
+  margin-top: 20px;
+}
+body .connect-ways-BH-Mac {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 42px;
+  margin-right: 42px;
+}
+body .connect-ways-BH-Mac .logo-and-offical-website {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 105px;
+  height: 35px;
+  background: #3E4758;
+  border-radius: 2px;
+  text-align: center;
+  line-height: 35px;
+  cursor: pointer;
+}
+body .connect-ways-BH-Mac .logo-and-offical-website img {
+  width: 18px;
+  margin-right: 8px;
+}
+body .connect-ways-BH-Mac .logo-and-offical-website span {
+  font-size: 12px;
+  color: #FFFFFF;
+  letter-spacing: 0.75px;
+}
+body .connect-ways-BH-Mac .service-phone {
+  font-size: 12px;
+  color: #FFFFFF;
+  letter-spacing: 0.75px;
+  margin-left: 28px;
+}
+body .connect-ways-BH-Mac .consult-time {
+  margin-left: 12px;
+  font-size: 12px;
+  color: #8F9EB9;
+  letter-spacing: 0.75px;
+}

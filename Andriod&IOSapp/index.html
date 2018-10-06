@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 ,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/mui.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/zepto.min.js"></script>
+    <script src="./js/jquery.i18n.min.js"></script>
+    <script src="./js/mui.min.js"></script>
+    <script src="./js/common.js"></script>
+    <script src="./js/index.js"></script> 
+    <title data-lang="index">充值首页</title>
+</head>
+<body style="padding-bottom:1rem;">
+
+    
+    <div id="app">
+        <!-- 头部 -->
+        <div class="header-of-BHapp">
+            <div class="wrap-of-header-top">
+                <!-- 采用flex布局 -->
+                <div class="logo-of-BHapp">
+                    <a href="#"><img src="./img/user-s.png" alt=""></a>
+                </div>
+                <div class="userinfo-of-BHapp">
+                    <h4>10101010010</h4>
+                    <h5>BOHE套餐将于<span id="expiry_time">2018年9月10日</span>后到期</h5>
+                </div>
+            </div>
+            <!-- <div class="wrap-of-header-bottom"> -->
+                <!-- 采用flex布局 -->
+                <!-- <img src="./img/fee-continue.png" alt="">
+                <p data-lang="ar">自动续费服务（<span id="notOpen" data-lang="no_open">未开通</span>）</p>
+                <a href="javsscript:;" id="isOpenService" data-lang="choose_open">
+                    开通自动续费
+                </a> -->
+            <!-- </div> -->
+        </div>
+
+        <div class="wrap-whole-BH">
+            <!-- 套餐类别 -->
+            <div class="wrap-of-packages-BHApp">
+                 <ul class="packages-BHapp">
+                  
+                </ul> 
+            </div>
+            <!-- 终端使用说明 -->
+            <div class="device-info" data-lang="apply_range">
+                适用于手机/pad/电脑端
+            </div>
+            <!-- 套餐列表 -->
+            <div class="packages-list-of-BHapp">
+
+            </div>
+        </div>
+
+        <!-- 支付部分 -->
+        <div class="pay-money">
+            <div class="pay-ways">
+                <ul>
+                    <li data-id=2>
+                        <span>
+                            <img src="./img/alipay-s.png" alt="">
+                            <p data-lang="ap">支付宝支付</p>
+                        </span>
+                        <!-- 默认选中支付方式 -->
+                        <div class="payicon payways-active"></div>
+                    </li>
+                    <li data-id=1>
+                        <span>
+                            <img src="./img/wechat-pay.png" alt="">
+                            <p data-lang="wp">微信支付</p>
+                        </span>
+                        <!-- 点击后通过JS将以上的样式添加到此处 -->
+                        <div class="payicon"></div>
+                    </li>
+                    <li data-id=5>
+                        <span>
+                            <img src="./img/pay-small.png" alt="">
+                            <p data-lang="pp">pay支付</p>
+                        </span>
+                        <div class="payicon"></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 立即支付 -->
+        <div class="pay-instance"  id="pay-instance">
+            <a href="javascript:;" data-lang="pi">立即支付<span></span></a>
+        </div>
+
+    </div>
+</body>
+</html>

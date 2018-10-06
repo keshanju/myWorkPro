@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/third-login.css">
+    <link rel="stylesheet" href="./css/layer.css">
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/layer.js"></script>
+    <script src="/js/md5.js"></script>
+    <script src="./js/common.js"></script>
+    <title>第三方登陆</title>
+</head>
+
+<body>
+    <div class="login-frame-qm">
+        <!-- 描述与取消 -->
+        <div class="header-of-third-login-BH">
+            <span class="is-login">请绑定已注册账号</span>
+            <img src="./img/member-cancel.png" alt="" class="cansel-login-frame">
+        </div>
+        <!-- 如果用户已经是注册用户，则显示这个登陆绑定界面 -->
+        <div class="wrap-one-of-BH">
+
+            <div class="bindways-login-BH">
+                <ul>
+                    <li class="active">绑定手机</li>
+                    <li>绑定邮箱</li>
+                </ul>
+            </div>
+
+            <div class="login-info-BH">
+                <!-- 手机号绑定登录 -->
+                <ul class="mobile-login-BH">
+                    <!-- 手机号 -->
+                    <li class="mobile-info">
+                        <label class="china-mobile" id="china-mobile">
+                            <input type="text" value="+86">
+                            <a href="javascript:;" class="arrow-qm down">^</a>
+                        </label>
+                        <input type="text" placeholder="手机号" id="mobile-phone">
+                        <h5 id="forget-msg" class="warning-msg"></h5>
+                        <h5 id="forget-msg-mobile" class="warning-msg"></h5>
+                    </li>
+                    <!-- 图形验证码 -->
+                    <li class="vertifycode-info" style="display: none">
+                        <input type="text" placeholder="图形验证码" id="verify-image-mobilecode">
+                        <img src="" class="imgcode-BH" id="images-code" data-info="" />
+                        <h5 id="forget-msg" class="warning-msg"></h5>
+                    </li>
+                    <!-- 短信验证码 -->
+                    <li class="messagecode-info">
+                        <input type="text" placeholder="验证码" id="verify-id-mobilecode">
+                        <h4 id="get-verify-mobilecode">发短信</h4>
+                    </li>
+                    <!-- 登录密码设置 -->
+                    <li class="hide-of-log-info" id="setPassword">
+                        <input type="password" placeholder="设置登录密码" id="password-been-set">
+                    </li>
+                    <!-- 体验套餐 -->
+                    <li class="hide-of-log-info" id="chooseExpPackage">
+                        <select autofocus class="exp-packages-list" id="exp-packages-listmobile" name="选择体验套餐">
+                            <option value="" selected>选择体验套餐</option>
+                        </select>
+                    </li>
+                    
+                    <li class="bind-login-BH" id="bind-loginmobile-BH">
+                        <p>绑定并登录</p>
+                    </li>
+                </ul>
+                <!-- 邮箱绑定登录 -->
+                <ul class="hide-of-log-info email-login-BH">
+                    <!-- 邮箱号 -->
+                    <li class="email-info">
+                        <input type="text" placeholder="邮箱号" id="email-num">
+                        <h5 id="forget-msg-email" class="warning-msg"></h5>
+                    </li>
+                    <!-- 图形验证码 -->
+                    <li class="vertifycode-info" style="display: none">
+                        <input type="text" placeholder="图形验证码" id="verify-image-mailcode">
+                        <img src="" class="imgcode-BH" id="images-code1" data-info="" />
+                        <h5 id="forget-msg" class="warning-msg"></h5>
+                    </li>
+                    <!-- 邮件验证码 -->
+                    <li class="messagecode-info">
+                        <input type="text" placeholder="验证码" id="verify-id-emailcode">
+                        <h4 id="get-verify-mailcode">发送邮件</h4>
+                    </li>
+                    <!-- 密码设置 -->
+                    <li class="hide-of-log-info" id="setPasswordTwo">
+                        <input type="password" placeholder="设置登录密码" id="password-has-set-mail">
+                    </li>
+                    <!-- 体验套餐 -->
+                    <li class="hide-of-log-info" id="chooseExpPackageTwo">
+                        <select autofocus class="exp-packages-list" id="exp-packages-listmail" name="选择体验套餐">
+                            <option value="" selected>选择体验套餐</option>
+                        </select>
+                    </li>
+
+                    <li class="bind-login-BH" id="bind-loginmail-BH">
+                        <p>绑定并登录</p>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <script>
+        $(".cansel-login-frame").on("click", function () {
+            $("body").hide();
+        });
+        var no_login_code = 400006;
+        var register_type,
+            is_validate,
+            package_id,
+            price_id,
+            phone,
+            smscode,
+            smscode_key,
+            checkcode,
+            checkcode_key,
+            password,
+            account_type;
+        var bindMobile = {
+            /**
+             * 接口一：获取图形验证码的接口
+             */
+            getcode: function (callback) {
+                $.ajax({
+                    type: "get",
+                    url: ourURL + "/tools/captcha?captcha_type=webflat",
+                    async: true,
+                    success: callback //请求成功后的回调函数，回调函数的参数就是一个后台返回的json对象，里面包含着我们需要的数据，然后我们就可以通过对象.的方法获取到所需要的参数
+                })
+            },
+            /**
+             * 接口二：获取注册赠送套餐的接口
+             */
+            package: function (callback) {
+                $.ajax({
+                    type: "post",
+                    url: ourURL + "/api/auth/register/package",
+                    async: true,
+                    success: callback
+                });
+            },
+            /**
+             * 接口三：获取短信验证码的接口
+             */
+            smsCode: function (json, callback) {
+                $.ajax({
+                    type: "post",
+                    url: ourURL + "/tools/smscode",
+                    data: json,
+                    async: true,
+                    success: callback
+                });
+            },
+            /**
+             * 接口四：获取第三方绑定的接口
+             */
+            bindPlat: function (json, callback) {
+                $.ajax({
+                    type: "post",
+                    url: ourURL + "/api/auth/bind_plat",
+                    data: json,
+                    async: true,
+                    success: callback
+                })
+            },
+            /**
+             *  接口五： 获取邮箱验证码的接口
+             */
+            mailCode: function (json, callback) {
+                $.ajax({
+                    type: "post",
+                    url: ourURL + "/tools/mailcode",
+                    data: json,
+                    success: callback
+
+                })
+            },
+            /***
+             * 接口是否需要验证图型验证码 0不需要 1需要
+             * @param {Object} data 参数 path method
+             * @param {Object} callback 成功的回调
+             * @param {Object} error 错误的回调
+             */
+            isCaptcha: function (data) {
+                var flag = false;
+                $.ajax({
+                    type: "post",
+                    url: ourURL + "/tools/is_captcha",
+                    data: data,
+                    async: false,
+                    dataType: "json",
+                    success: function (data) {
+                        if (data && data.code == 0 && data.data.is_validate != 0) {
+                            flag = true;
+                        } else {
+                            flag = false;
+                        }
+                    }
+                });
+                return flag;
+            },
+            /***
+             * 传入需要判断是否出现验证码的所有接口，如果有一个要显示图形验证码 ，那么就都显示出来
+             * @param {Object} dataArr 判断的接口数组
+             * @param {Object} callback 需要显示执行的操作
+             * @param {Object} error 不需要显示执行的操作
+             */
+            isCaptchadoing: function (dataArr, callback, error) {
+                var isResult = false;
+                $.each(dataArr, function (i, v) {
+                    if (bindMobile.isCaptcha(v)) {
+                        isResult = true;
+                        return false;
+                    }
+                })
+                if (isResult) {
+                    callback()
+                } else {
+                    error()
+                }
+            },
+
+            /**
+             * 手机号正则验证
+             */
+            phonelimit: function (id, tipsId) { //国内手机号正则验证
+                var reg = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
+                if (!reg.test($(id).val())) {
+                    $(tipsId).text("请填入正确手机号")
+                } else {
+                    $(tipsId).text("")
+                }
+            },
+            /**
+             * 邮箱正则验证
+             */
+            mailLimit: function (id, tipsId) { //限制邮箱
+                var mail = $(id).val();
+                var re = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.)[a-z0-9]+$/;
+                if (!re.test(mail)) {
+                    $(tipsId).html("邮箱格式错误");
+                } else {
+                    $(tipsId).html("");
+                }
+            },
+
+            /**获取url 中的参数
+             * @param {String} name
+             */
+            getUrlParam: function (name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+                var r = window.location.search.substr(1).match(reg); //匹配目标参数
+                if (r != null) return unescape(r[2]);
+                return null; //返回参数值
+            },
+            /**
+             * 验证码倒计时
+             */
+            countdown: function (id) { //验证码倒计时
+                var time = 60,
+                    timer;
+                clearInterval(timer);
+                timer = setInterval(function () {
+                    $(id).attr("disabled", "disabled");
+                    time--;
+                    $(id).text("重新发送（" + time + "）");
+                    if (time == 0) {
+                        $(id).text("获取验证码").removeAttr("disabled");
+                        clearInterval(timer);
+                    }
+                }, 1000)
+            },
+        };
+
+        // 获取到url地址上的code值
+        var code = bindMobile.getUrlParam("code");
+
+        // 循环遍历注册时赠送的体验套餐
+        bindMobile.package(function (res) {
+            //获取套餐id以及相应的价格id
+            if (res.code == 0) {
+                var aa = res.data;
+                $.each(aa, function (k, v) {
+                    package_ids = v.package_id;
+                    package_title = v.package_title;
+                    var bb = v.price;
+                    $.each(bb, function (k, v) {
+                        price_short_desc = v.price_short_desc;
+                        price_ids = v.price_id;
+                    });
+                    var options = "<option data-id=" + package_ids + " data-pid=" + price_ids +
+                        ">" + package_title + " " + price_short_desc + "</option>";
+                    $("#exp-packages-listmobile").append(options);
+                    $("#exp-packages-listmail").append(options);
+                });
+            } else if (res.code == no_login_code) {
+                layer.msg("登录过期，请重新登录！");
+            } else {
+                layer.msg(res.msg);
+            }
+        });
+
+        // 判断那些接口是否需要图形验证码
+        bindMobile.isCaptchadoing(
+            [{
+                    path: "/tools/smscode",
+                    method: "post"
+                },
+                {
+                    path: "/tools/mailcode",
+                    method: "post"
+                },
+                {
+                    path: "/tools/smscode/voice",
+                    method: "post"
+                },
+                {
+                    path: "/api/auth/register",
+                    method: "post"
+                },
+                {
+                    path: "/api/auth/bind_plat",
+                    method: "post"
+                }
+            ],
+            function (res) {
+                $(".vertifycode-info").show();
+                // 获取图形验证码，调用 getcode 这个接口,不需要传递参数
+                bindMobile.getcode(function (res) {
+                    $("#images-code").attr('src', res.data.img);
+                    $("#images-code").attr("data-info", res.data.key);
+                    $("#images-code1").attr('src', res.data.img);
+                    $("#images-code1").attr("data-info", res.data.key);
+                });
+            },
+            function (res) {
+                $(".vertifycode-info").hide();
+            });
+
+        //获取赠送套餐id和价格id 
+        $("#exp-packages-listmobile").on("click", function () {
+            package_id = $("#exp-packages-listmobile option:selected").attr("data-id");
+            price_id = $("#exp-packages-listmobile option:selected").attr("data-pid");
+        })
+        // 默认是手机号绑定登录
+        bindMobile.getcode(function (res) {
+            if(res.code == 0) {
+                $("#images-code").attr('src', res.data.img);
+                $("#images-code").attr("data-info", res.data.key);
+
+                // 手机号正则验证
+                $("#mobile-phone").blur(function () {
+                    bindMobile.phonelimit("#mobile-phone", "#forget-msg")
+                });
+                // 获取短信验证码
+                $("#get-verify-mobilecode").on("click", function () {
+                    //获取到绑定所需要的值，电话号码，短信验证码，以及短信验证码的key
+                    phone = $("#mobile-phone").val();
+                    checkcode = $("#verify-image-mobilecode").val();
+                    checkcode_key = $("#images-code").attr("data-info");
+                    //发送获取短信验证码的请求
+                    bindMobile.smsCode({
+                        phone: phone,
+                        checkcode: checkcode,
+                        checkcode_key: checkcode_key,
+                        code: code,
+                        state: 3
+                    }, function (res) {
+                        if (res.code == 0) {
+                            console.log(res.data);
+                            $("#forget-msg-moblie").text("已发送");
+                            $("#verify-id-mobilecode").attr("data-code",
+                                res.data.smscode_key);
+                            bindMobile.countdown("#get-verify-mobilecode");
+                            register_type = res.data.bind_status;
+                            if (register_type == 4) {
+                                // 该用户已注册
+                                // 显示密码框，和体验套餐的一栏，并且同时将绑定并登录改为注册并登陆
+                                $("#setPassword").show();
+                                $("#chooseExpPackage").show();
+                                $(".bind-login-BH").find("p").text("注册并绑定");
+                            }
+                        } else if (res.code == no_login_code) {
+                            layer.msg("登录过期，请重新登录！");
+                        } else {
+                            layer.msg(res.msg);
+                        }
+
+                    });
+                })
+                // 点击进行绑定手机号
+                $("#bind-loginmobile-BH").on("click", function (res) {
+                    checkcode = $("#verify-image-mobilecode").val();
+                    checkcode_key = $("#images-code").attr("data-info");
+                    phone = $("#mobile-phone").val();
+                    smscode = $("#verify-id-mobilecode").val();
+                    smscode_key = $("#verify-id-mobilecode").attr("data-code");
+                    password = $("#password-been-set").val();
+                    //第三方登录接口
+                    if (register_type == 3) {
+                        //绑定已注册用户
+                        bindMobile.bindPlat({
+                            register_type: register_type,
+                            phone: phone,
+                            smscode: smscode,
+                            smscode_key: smscode_key,
+                            checkcode: checkcode,
+                            checkcode_key: checkcode_key,
+                            code: code,
+                            country_code: 86,
+                            account_type: 1
+                        }, function (res) {
+                            if (res.code == 0) {
+                                layer.alert("绑定成功！");
+                                // 将成功后的json数据返回给客户端，通过定义的方法loginSuccess()
+
+                            } else if (res.code == no_login_code) {
+                                layer.alert("登录过期，请重新登录！");
+                            } else {
+                                layer.msg(res.msg);
+                            }
+                        })
+                    } else if (register_type == 4) {
+                        //绑定未注册用户
+                        bindMobile.bindPlat({
+                            register_type: register_type,
+                            phone: phone,
+                            smscode: smscode,
+                            smscode_key: smscode_key,
+                            checkcode: checkcode,
+                            checkcode_key: checkcode_key,
+                            password: $.md5(password),
+                            price_id: price_id,
+                            package_id: package_id,
+                            code: code,
+                            country_code: 86,
+                            account_type: 1
+                        }, function (res) {
+                            if (res.code == 0) {
+                                console.log(res.code);
+                                layer.alert("绑定成功！");
+                                // 将成功后的json数据返回给客户端，通过定义的方法loginSuccess()
+
+                            } else if (res.code == no_login_code) {
+                                layer.alert("登录过期，请重新登录！")
+                            } else {
+                                layer.msg(res.msg);
+                            }
+                        })
+                    }
+                });
+            } else if (res.code == no_login_code) {
+                layer.alert("登录过期，请重新登录！")
+            } else {
+                layer.alert(res.msg)
+            }
+        });
+        //点击更新图形验证码
+        $(".imgcode-BH").on("click", function () {
+            bindMobile.getcode(function (res) {
+                $("#images-code").attr('src', res.data.img);
+                $("#images-code").attr("data-info", res.data.key);
+                $("#images-code1").attr('src', res.data.img);
+                $("#images-code1").attr("data-info", res.data.key);
+            })
+        });
+
+        // 分两种方式进行登录
+        $(".bindways-login-BH").on("click", "li", function () {
+            $(this).addClass("active").siblings().removeClass("active");
+            var index = $(this).index();
+            $(".login-info-BH ul").eq(index).show().siblings().hide();
+            if (index == 0) {
+                //获取赠送套餐id和价格id 
+                $("#exp-packages-listmobile").on("click", function () {
+                    package_id = $("#exp-packages-listmobile option:selected").attr("data-id");
+                    price_id = $("#exp-packages-listmobile option:selected").attr("data-pid");
+                })
+                bindMobile.getcode(function (res) {
+                    $("#images-code").attr('src', res.data.img);
+                    $("#images-code").attr("data-info", res.data.key);
+
+                    // 手机号正则验证
+                    $("#mobile-phone").blur(function () {
+                        bindMobile.phonelimit("#mobile-phone", "#forget-msg")
+                    });
+                    // 获取短信验证码
+                    $("#get-verify-mobilecode").on("click", function () {
+                        //获取到绑定所需要的值，电话号码，短信验证码，以及短信验证码的key
+                        phone = $("#mobile-phone").val();
+                        checkcode = $("#verify-image-mobilecode").val();
+                        checkcode_key = $("#images-code").attr("data-info");
+                        //发送获取短信验证码的请求
+                        bindMobile.smsCode({
+                            phone: phone,
+                            checkcode: checkcode,
+                            checkcode_key: checkcode_key,
+                            code: code,
+                            state: 3
+                        }, function (res) {
+                            if (res.code == 0) {
+                                console.log(res.data);
+                                $("#forget-msg-moblie").text("已发送");
+                                $("#verify-id-mobilecode").attr("data-code",
+                                    res.data.smscode_key);
+                                bindMobile.countdown("#get-verify-mobilecode");
+                                register_type = res.data.bind_status;
+                                if (register_type == 4) {
+                                    // 该用户已注册
+                                    // 显示密码框，和体验套餐的一栏，并且同时将绑定并登录改为注册并登陆
+                                    $("#setPassword").show();
+                                    $("#chooseExpPackage").show();
+                                    $(".bind-login-BH").find("p").text("注册并绑定");
+                                }
+                            } else if (res.code == no_login_code) {
+                                layer.msg("登录过期，请重新登录！");
+                            } else {
+                                layer.msg(res.msg);
+                            }
+
+                        });
+                    })
+                    // 点击进行绑定手机号
+                    $("#bind-loginmobile-BH").on("click", function (res) {
+                        checkcode = $("#verify-image-mobilecode").val();
+                        checkcode_key = $("#images-code").attr("data-info");
+                        phone = $("#mobile-phone").val();
+                        smscode = $("#verify-id-mobilecode").val();
+                        smscode_key = $("#verify-id-mobilecode").attr("data-code");
+                        password = $("#password-been-set").val();
+                        //第三方登录接口
+                        if (register_type == 3) {
+                            //绑定已注册用户
+                            bindMobile.bindPlat({
+                                register_type: register_type,
+                                phone: phone,
+                                smscode: smscode,
+                                smscode_key: smscode_key,
+                                checkcode: checkcode,
+                                checkcode_key: checkcode_key,
+                                code: code,
+                                country_code: 86,
+                                account_type: 1
+                            }, function (res) {
+                                if (res.code == 0) {
+                                    layer.alert("绑定成功！");
+                                    // 将成功后的json数据返回给客户端，通过定义的方法loginSuccess()
+
+                                } else if (res.code == no_login_code) {
+                                    layer.alert("登录过期，请重新登录！");
+                                } else {
+                                    layer.msg(res.msg);
+                                }
+                            })
+                        } else if (register_type == 4) {
+                            //绑定未注册用户
+                            bindMobile.bindPlat({
+                                register_type: register_type,
+                                phone: phone,
+                                smscode: smscode,
+                                smscode_key: smscode_key,
+                                checkcode: checkcode,
+                                checkcode_key: checkcode_key,
+                                password: $.md5(password),
+                                price_id: price_id,
+                                package_id: package_id,
+                                code: code,
+                                country_code: 86,
+                                account_type: 1
+                            }, function (res) {
+                                if (res.code == 0) {
+                                    console.log(res.code);
+                                    layer.alert("绑定成功！");
+                                    // 将成功后的json数据返回给客户端，通过定义的方法loginSuccess()
+
+                                } else if (res.code == no_login_code) {
+                                    layer.alert("登录过期，请重新登录！")
+                                } else {
+                                    layer.msg(res.msg);
+                                }
+                            })
+                        }
+                    });
+                });
+            } else if (index == 1) {
+                //获取赠送套餐id和价格id
+                $("#exp-packages-listmail").on("click", function () {
+                    package_id = $("#exp-packages-listmail option:selected").attr("data-id");
+                    price_id = $("#exp-packages-listmail option:selected").attr("data-pid");
+                })
+                bindMobile.getcode(function (res) {
+                    $("#images-code1").attr('src', res.data.img);
+                    $("#images-code1").attr("data-info", res.data.key);
+                    // 邮箱正则验证
+                    $("#email-num").blur(function () {
+                        bindMobile.mailLimit("#email-num", "#forget-msg-email")
+                    });
+                    // 获取邮箱验证码
+                    $("#get-verify-mailcode").on("click", function () {
+                        //获取到绑定所需要的值，电话号码，短信验证码，以及短信验证码的key
+                        email = $("#email-num").val();
+                        checkcode = $("#verify-image-mailcode").val();
+                        checkcode_key = $("#images-code1").attr("data-info");
+                        //发送获取邮箱验证码的请求
+                        bindMobile.mailCode({
+                            email: email,
+                            checkcode: checkcode,
+                            checkcode_key: checkcode_key,
+                            code: code,
+                            state: 3
+                        }, function (res) {
+                            if (res.code == 0) {
+                                console.log(res.data);
+                                $("#get-verify-mailcode").text("已发送");
+                                $("#verify-id-emailcode").attr("data-code", res.data.emailcode_key);
+                                bindMobile.countdown("#get-verify-mailcode");
+                                register_type = res.data.bind_status;
+                                if (register_type == 4) {
+                                    // 该用户已注册
+                                    // 显示密码框，和体验套餐的一栏，并且同时将绑定并登录改为注册并登陆
+                                    $("#setPasswordTwo").show();
+                                    $("#chooseExpPackageTwo").show();
+                                    $("#bind-loginmail-BH").find("p").text("注册并绑定");
+                                }
+                            } else if (res.code == no_login_code) {
+                                layer.msg("登录过期，请重新登录！");
+                            } else {
+                                layer.msg(res.msg);
+                            }
+                        });
+                    })
+
+                    // 点击进行绑定邮箱号
+                    $("#bind-loginmail-BH").on("click", function (res) {
+                        checkcode = $("#verify-image-mailcode").val();
+                        checkcode_key = $("#images-code1").attr("data-info");
+                        email = $("#email-num").val();
+                        mailcode  = $("#verify-id-emailcode").val();
+                        mailcode_key  = $("#verify-id-emailcode").attr("data-code");
+                        password = $("#password-has-set-mail").val();
+                        //第三方登录接口
+                        if (register_type == 3) {
+                            //绑定已注册用户
+                            bindMobile.bindPlat({
+                                register_type: register_type,
+                                email: email,
+                                mailcode: mailcode,
+                                mailcode_key : mailcode_key ,
+                                checkcode: checkcode,
+                                checkcode_key: checkcode_key,
+                                code: code,
+                                account_type: 2
+                            }, function (res) {
+                                if (res.code == 0) {
+                                    layer.alert("绑定成功！");
+                                    // 将成功后的json数据返回给客户端，通过定义的方法loginSuccess()
+                                } else if (res.code == no_login_code) {
+                                    layer.alert("登录过期，请重新登录！");
+                                } else {
+                                    layer.msg(res.msg);
+                                }
+                            })
+                        } else if (register_type == 4) {
+                            //绑定未注册用户
+                            bindMobile.bindPlat({
+                                register_type: register_type,
+                                email: email,
+                                mailcode: mailcode,
+                                mailcode_key: mailcode_key,
+                                checkcode: checkcode,
+                                checkcode_key: checkcode_key,
+                                // password: $.md5(password),
+                                password: password,
+                                price_id: price_id,
+                                package_id: package_id,
+                                code: code,
+                                account_type: 2
+                            }, function (res) {
+                                if (res.code == 0) {
+                                    console.log(res.code);
+                                    layer.alert("绑定成功！");
+                                    // 将成功后的json数据返回给客户端，通过定义的方法loginSuccess()
+                                } else if (res.code == no_login_code) {
+                                    layer.alert("登录过期，请重新登录！")
+                                } else {
+                                    layer.msg(res.msg);
+                                }
+                            })
+                        }
+                    });
+                })}
+        });
+        
+        
+
+    </script>
+</body>
+
+</html>

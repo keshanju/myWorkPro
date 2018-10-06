@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/mui.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="./js/zepto.min.js"></script>
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/jquery.i18n.min.js"></script>
+    <script src="./js/mui.min.js"></script>
+    <script src="./js/common.js"></script>
+    <script src="./js/index.js"></script>
+    <title data-lang="about_us">关于我们</title>
+    <style>
+        .header_about_us_en_BH {
+            background:#FFF;
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            padding: .2rem .4rem;
+            box-sizing: border-box;
+            align-items: center;
+            border-bottom: 0.01rem solid #e8e8e8; 
+        } 
+        .header_about_us_en_BH img {
+            width: 0.89rem;
+            margin-right: 0.15rem;
+        }
+        .header_about_us_en_BH .version_num_en_BH {
+            width: 80%;
+        }
+        .header_about_us_en_BH .version_num_en_BH h1 {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            margin-bottom: -0.2rem;
+            font-weight: 600;
+        }
+        .header_about_us_en_BH .version_num_en_BH h1 p:first-child {
+            color: #f03f40;
+            font-size: .48rem;
+        }
+        .header_about_us_en_BH .version_num_en_BH h1 p:nth-child(2) {
+            font-size: .4rem;
+            color: #f8423c;
+        }
+        .header_about_us_en_BH .version_num_en_BH span {
+            color: #858585;
+            font-size: 0.22rem;
+        }
+        .lists_contents_en_BH {
+            overflow: hidden;
+            padding: .15rem .4rem;
+            background: #FFF;
+            border-bottom: 1px solid #e8e8e8; 
+            box-sizing: border-box;
+        }
+        .lists_contents_en_BH li {
+            float: left;
+            width: 1.3rem;
+            margin-right: 1.4rem;
+            margin-top: .15rem;
+            text-align: center;
+            cursor: pointer;
+        }
+        .lists_contents_en_BH li:nth-child(3n) {
+            margin-right: 0;
+        }
+        .lists_contents_en_BH li img {
+            width: 0.66rem;
+        }
+        .lists_contents_en_BH li h3 {
+            font-size: .3rem;
+            font-weight: normal;
+            color: #000;
+        }
+        .lists_two_en_BH {
+            width: 100%;
+            background: #FFF;
+            padding: .3rem .2rem;
+            box-sizing: border-box;
+        }
+        .lists_two_en_BH li {
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            margin-bottom: .6rem;
+        }
+        .lists_two_en_BH li img {
+            width: 0.55rem;
+        }
+        .open_more_contend_bh h3 {
+            font-size: .36rem;
+            font-weight: 500;
+            letter-spacing: 0.05rem;
+            margin-top: 0.1rem;
+            margin-bottom: 0.35rem;
+            color: #000;
+        }
+        .open_more_contend_bh span {
+            font-size: .3rem;
+            color: #6a767c;
+        }
+        .footer_about_us_en_BH {
+            width: 100%;
+            color: #bababa; 
+            text-align: center;
+            position: fixed;
+            height: .8rem;
+            background: #262c2f;
+            left: 50%;
+            bottom: 0;
+            margin-left:-50%; 
+            padding-top: .2rem;
+        }
+        .footer_about_us_en_BH a {
+            color: #de394a;
+            display: inline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- header -->
+    <div class="header_about_us_en_BH">
+        <img src="./img/aboutus_en.png" alt="">
+        <div class="version_num_en_BH">
+            <h1><p>BOHE</p><p data-lang="Accelerator">加速器</p></h1>
+            <span data-lang="Version">版本号：0.0.1</span>
+        </div>
+    </div>
+    <!-- lists_one -->
+    <div class="lists_contents_en_BH">
+        <ul>
+            <li><img src="./img/game_acc.png" alt=""><h3 data-lang="Game">游戏加速</h3></li>
+            <li><img src="./img/zhibo_acc.png" alt=""><h3 data-lang="Live_Streaming">直播加速</h3></li>
+            <li><img src="./img/video.png" alt=""><h3 data-lang="Video">视频加速</h3></li>
+            <li><img src="./img/musice_acc.png" alt=""><h3 data-lang="Music">音乐加速</h3></li>
+            <li><img src="./img/web_acc.png" alt=""><h3 data-lang="Webpage">网页加速</h3></li>
+        </ul>
+    </div>
+    <!-- lists_two -->
+    <div class="lists_two_en_BH">
+        <ul>
+            <li>
+                <img src="./img/open_more.png" alt="">
+                <div class="open_more_contend_bh">
+                    <h3 data-lang="acc_to_cn">打开更多</h3>
+                    <span data-lang="ac">看、听、玩、刷，国内主流平台无限畅玩</span>
+                </div>
+            </li>
+            <li>
+                <img src="./img/faster.png" alt="">
+                <div class="open_more_contend_bh">
+                    <h3 data-lang="high_speed">加速更快</h3>
+                    <span data-lang="hsc">专业获取访问中国最快网速画面更高清,速度更通畅</span>
+                </div>
+            </li>
+            <li>
+                <img src="./img/private_deep.png" alt="">
+                <div class="open_more_contend_bh">
+                    <h3 data-lang="ultra_secure">保密更强</h3>
+                    <span data-lang="usc">数据完全加密，保护账号隐私网上冲浪不留痕</span>
+                </div>
+            </li>
+            <li>
+                <img src="./img/surport.png" alt="">
+                <div class="open_more_contend_bh">
+                    <h3 data-lang="aac">支持更全</h3>
+                    <span data-lang="esc">Windows/Mac/Android/iOS多平台支持随时随地随心享受同步加速</span>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <!-- footer -->
+    <div class="footer_about_us_en_BH">
+        <span data-lang="owc">官方网站：</span><a href="www.bohe.com">www.bohe.com</a>
+    </div>
+
+</body>
+</html>

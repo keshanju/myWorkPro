@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html data-lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/layer.css">
+    <link rel="stylesheet" href="./css/cropper.min.css">
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/cropper.min.js"></script>
+    <script src="./js/jquery.i18n.min.js"></script>
+    <script src="./js/layer.js"></script>
+    <script src="./js/common.js"></script>
+    <title data-lang="member_center">会员中心</title>
+
+</head>
+
+<body>
+
+    <!-- 定位的头像编辑弹出框123123 123123-->
+    <div class="edit-photo-BH photo-show">
+        <div class="top-edit-info-BH">
+            <span data-lang="edit_avatar">编辑头像</span>
+            <img src="./img/member-cancel.png" alt="">
+        </div>
+
+        <div class="upload-photo-BH">
+            <!-- 上传的图片位置 -->
+            <div class="popHeadImg">
+                <span data-lang="preview_picture">图片预览</span>
+                <img src="" alt="" id="popHeadImg">
+            </div>
+            <!--  -->
+            <div v-show="avatarUrl != null" style="width: 400px;height: 400px;display: none">
+                <img style="width: 100%;height: 100%;" id="popHeadImg" :src="avatarUrl">
+            </div>
+            <!-- 放大缩小 -->
+            <!-- <div class="resize-photo-BH">
+                <img class="shink-member-BH" src="./img/member-shrink.png" alt="">
+                <div class="scroll-control">
+                    <span class="slide-block-BH"></span>
+                </div>
+                <img src="./img/member-enlarge.png" alt="" class="enlarge-member-BH">
+            </div> -->
+        </div>
+        <span class="button-of-confirm">
+            <span class="upload-img-BH" data-lang="upload_pictures">上传图片</span>
+            <input type="file" accept="image/*" id="uploadImg" value="">
+            <span class="be-sure-to" id="be-sure-to" data-lang="confirm">确定</span>
+        </span>
+        <script>
+            var filename,bohe_pc_user,user_url;
+            var upload = {
+                initCropper: function () {
+                    // @ts-ignore
+                    var image = document.getElementById('popHeadImg');
+                    // @ts-ignore
+                    this.cropper = new Cropper(image, {
+                        aspectRatio: 1 / 1,
+                        viewMode: 3,
+                        dragMode: "none",
+                        modal: false,
+                        background: false,
+                        scalable: true,
+                        autoCropArea: 0.5,
+                        cropBoxResizable: true,
+                        cropBoxMovable: true,
+                        highlight: true,
+                        minContainerWidth: 100,
+                        minContainerHeight: 100,
+                        minCanvasWidth: 100,
+                        minCanvasHeight: 100,
+                        minCropBoxWidth: 100,
+                        minCropBoxHeight: 100,
+                        crop: function (event) {
+                        },
+                    });
+                },
+                /**
+                 * 选择本地图片
+                 */
+                onChooseImage: function () {
+                    var self = this;
+                    $("#uploadImg").on('change', function () {
+                        var file = this.files[0];
+                        // 确认选择的文件是图片
+                        if (file.type.indexOf("image") == 0) {
+                            var reader = new FileReader();
+                            reader.readAsDataURL(file);
+                            reader.onload = function (e) {
+                                // 图片base64化
+                                filename = this.result;
+                                self.cropper.reset();
+                                self.cropper.replace(filename);
+                            };
+                        }
+                    });
+                },
+                upLoadImg: function (json,callback) {
+                    $.ajax({
+                        type: 'post',
+                        url: ourURL + '/api/user/upload',
+                        data: json,
+                        success: callback
+                    })
+                },
+                editUserInfo: function (json,callback) {
+                    $.ajax({
+                        type: 'post',
+                        url: ourURL + '/api/user/edit',
+                        data: json,
+                        success: callback
+                    })
+                }
+            }
+            upload.onChooseImage();
+            upload.initCropper();
+            $("#be-sure-to").bind("click", function () {
+                if(filename==undefined||filename==null||filename==""){
+                    return ;
+                }
+                //上传图片
+                upload.upLoadImg({
+                    account_token: account_token,
+                    filename: filename,
+                    folder_name: bohe_pc_user
+                }, function (res) {
+                    if (res.code == 0) {
+                        user_url = res.data.file_path;// 拿到返回的图片的地址
+                    }
+                })
+                // 修改用户信息
+                upload.editUserInfo({
+                    account_token: account_token,
+                    user_url: user_url
+                },function (res) {
+                    if (res.code == 0) {
+                        layer.msg(LANG["upload_success_info"],{anim:0},function(){
+                            memberCenter.getUserInfo({
+                                account_token: account_token
+                            },function (res) {
+                                if (res.code  == 0) {
+                                    avatar = res.data.avatar;
+                                    $("#user-avtar-BH").attr("src",avatar);
+                                }});
+                        });
+                        $(".edit-photo-BH").hide();
+                    }   
+                })
+            })
+            
+        </script>
+    </div>
+    <!-- 页面顶部top -->
+    <div class="BH-Mac-member-top">
+        <div class="wrap-of-member-top">
+            <!-- 采用flex布局 -->
+            <!-- 左边 -->
+            <div class="user-info-details">
+
+                <div class="wrap-camera-show">
+                    <a href="javascript:;" class="camera-show">
+                        <img src="./img/touxiang.png" alt="" id="user-avtar-BH">
+                    </a>
+                    <!-- 定位的相机，默认隐藏，鼠标移上显示 -->
+                    <div class="wrap-img-show" style="display: none">
+                        <img src="./img/member-camera.png" alt="">
+                    </div>
+                </div>
+
+                <div class="member-info">
+                    <div class="top-of-user-info-BH-Mac">
+                        <h3 class="change-nickname">xxx@gmail.com</h3>
+                        <img src="./img/member-edit.png" alt="">
+                    </div>
+                    <!-- 点击用户信息编辑按钮出现编辑框 -->
+                    <div class="edit-nickname-BH edit-show">
+                        <input class="readin-nickname" type="text" placeholder="请编辑个性昵称" maxlength="23">
+                    </div>
+                    <div class="bottom-of-user-info-BH-Mac">
+                        <a href="javascript:;" id="count-hours" data-lang="">01</a>
+                        <h4 id="surplus-time"><span data-lang=""></span></h4>
+                    </div>
+                </div>
+
+            </div>
+            <!-- 右边 -->
+            <div class="recharge-on">
+                <a href="javascript:;" class="vip-recharge" id="vip-recharge">
+                    <img src="./img/member-vip.png" alt="">
+                    <h2 class="recharge-on-fee-BH" data-lang="renew">续费</h2>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- 页面中部center -->
+    <div class="BH-Mac-member-center">
+        <ul>
+
+            <!-- 官方公告模块 -->
+            <li class="list-one-BH">
+                <!-- 标题信息 -->
+                <div class="offical-declear">
+                    <img src="./img/member-declare.png" alt="">
+                    <h3 data-lang="Announcement">官方公告</h3>
+                </div>
+                <!-- 公告列表部分 -->
+                <ul class="explain-info">
+
+                </ul>
+
+            </li>
+
+            <!-- 常见问题模块 -->
+            <li class="list-two-BH">
+                <!-- 标题信息 -->
+                <div class="normal-questions">
+                    <img src="./img/zixun-BH.png" alt="">
+                    <h3 data-lang="game_information">游戏资讯</h3>
+                </div>
+                <!-- 游戏咨询 -->
+                <ul class="recover-info">
+                </ul>
+
+            </li>
+
+        </ul>
+    </div>
+    <!-- 页面底部bottom -->
+    <div class="BH-Mac-member-bottom">
+
+        <div class="activity-area">
+            <img src="./img/member-activity.png" alt="">
+
+            <h3 data-lang="activity_area">活动专区</h3>
+        </div>
+
+        <ul class="advertisement-imgs">
+            <li>
+                <img src="./img/no-activity-BH.png" alt="" style="width: 64px;height:64px">
+                <span data-lang="notice">暂无活动，敬请关注！</span>
+            </li>
+            <!-- 放置广告推广的图片 -->
+            <!-- <li>
+                <img src="./img/member-activity1.png" alt="">
+            </li>
+            <li>
+                <img src="./img/member-activity2.png" alt="">
+            </li> -->
+        </ul>
+
+    </div>
+    <!-- 定位的版本信息盒子 ，到时候由客户端调用接口进行渲染-->
+    <div class="BH-Mac-version">
+        <p>Ver:1.1.1.1</p>
+    </div>
+    <script>
+        var pravit_mobile,
+            expiry_time,
+            timer,
+            pay_type,
+            package_id,
+            price_id;
+        var no_login_code = 400006;
+        var memberCenter = {
+            /**获取url 中的参数
+             * @param {String} name
+             */
+            getUrlParam: function (name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+                var r = window.location.search.substr(1).match(reg); //匹配目标参数
+                if (r != null) return unescape(r[2]);
+                return null; //返回参数值
+            },
+            //获取用户详细信息
+            getUserInfo: function (json, callback) {
+                $.ajax({
+                    type: 'post',
+                    url: ourURL + '/api/user/info',
+                    data: json,
+                    success: callback
+                });
+            },
+            //修改用户信息--昵称
+            editUserInfo: function (json, callback) {
+                $.ajax({
+                    type: 'post',
+                    url: ourURL + '/api/user/edit',
+                    data: json,
+                    success: callback
+                })
+            },
+            // 获取公告信息
+            getNewsInfo: function (json, callback) {
+                $.ajax({
+                    type: "get",
+                    url: ourURL + "/tools/news",
+                    data: json,
+                    success: callback
+                });
+            },
+            // 获取公告详情
+            getNewsDetail: function (callback) {
+                $.ajax({
+                    type: 'get',
+                    url: ourURL + '/tools/news/',
+                    data: json,
+                    success: callback
+                });
+            },
+            //获取游戏咨询
+            getConsult: function (json, callback) {
+                $.ajax({
+                    type: 'get',
+                    url: ourURL + '/api/news',
+                    data: json,
+                    success: callback
+                })
+            },
+            //获取活动列表
+            getActivityInfo: function (json, callback) {
+                $.ajax({
+                    type: 'get',
+                    url: ourURL + '/api/activity',
+                    data: json,
+                    success: callback
+                });
+            },
+            updateUserPhoto: function (json, callback) {
+                $.ajax({
+                    type: 'get',
+                    url: ourURL + '/api/user/upload',
+                    data: json,
+                    success: callback
+                })
+            },
+        }
+        //获取token
+        var account_token = memberCenter.getUrlParam("account_token");
+        //获取版本信息
+        var version_info = memberCenter.getUrlParam("version");
+        $(".BH-Mac-version").find("p").text(version_info);
+        //如果登录，则调用该接口，实时显示用户信息
+        if (account_token) {
+            memberCenter.getUserInfo({
+                account_token: account_token
+            }, function (res) {
+                if (res.code == 0) {
+                    pravit_mobile = res.data.mobile; //用户登录的手机号或者是邮箱
+                    expiry_time = res.data.expiry_time;
+                    pravit_email = res.data.email;
+                    nick_name = res.data.nickname;
+                    package_id = res.data.package_id;
+                    avatar = res.data.avatar;
+                    billing_type = res.data.billing_type;
+                    // 如果是手机登录，则将手机号显示，如果是邮箱号，则显示邮箱号，这里需要做一个判断，用户是邮箱登录还是手机登录
+                    $(".change-nickname").text(nick_name || pravit_email || pravit_mobile);
+                    // 对用户也要做一个判断如果是包月怎么显示，如果是计时怎么显示
+                    $(".camera-show").find("img").attr("src", avatar);
+                    if (billing_type == 1) {
+                        $("#count-hours").text(LANG["js"]);
+                        $("#surplus-time").find("span").text(LANG["sy_times"] + expiry_time); //用户套餐的有效加速时间
+                    } else if (billing_type == 2) {
+                        $("#count-hours").text(LANG["js"]);
+                        $("#surplus-time").find("span").text(LANG["by"] + expiry_time); //用户套餐的有效加速时间
+                    }
+                } else if (res.code == no_login_code) {
+                    layer.msg(LANG["expried_info"]);
+                } else {
+                    layer.msg(res.msg);
+                }
+            });
+            memberCenter.getNewsInfo({
+                page: 1,
+                size: 5
+            }, function (res) {
+                var cc = res.data.list;
+                $.each(cc, function (k, v) {
+                    var title_info = v.title;
+                    var publish_time = v.publish_time;
+                    var new_id = v.id;
+                    var n_lis = "<li data-id=" + new_id +
+                        "><a href='../notice/"+new_id+".html' target=\"_blank\"><p>" + title_info +
+                        "</p></a><span>" + publish_time + "</span></li>";
+                    $(".explain-info").append(n_lis);
+                });
+            });
+            memberCenter.getConsult({
+                page: 1,
+                size: 5,
+                support_type: 0,
+                class_type: 0
+            }, function (res) {
+                console.log(res.data);
+                var dd = res.data.list;
+                $.each(dd, function (k, v) {
+                    var title_info = v.title;
+                    var publish_time = v.publish_time;
+                    var consult_id = v.id;
+                    var m_lis = "<li data-id=" + consult_id +
+                        "><a href='../news/"+consult_id+".html' target=\"_blank\"><p>" + title_info +
+                        "</p></a></li>";
+                    $(".recover-info").append(m_lis);
+                });
+
+            })
+        } else {
+            layer.msg(LANG["expried_info"])
+        }
+        //鼠标移上显示相机移开隐藏
+        $(".wrap-camera-show").on("mouseenter", function () {
+            $(this).find(".wrap-img-show").show();
+        });
+        $(".wrap-camera-show").on("mouseleave", function () {
+            $(this).find(".wrap-img-show").hide();
+        });
+
+        //点击出现头像编辑框
+        $(".wrap-img-show").on("click", function () {
+            $("body").find(".edit-photo-BH").show();
+        });
+
+        //点击隐藏按钮实现头像编辑框隐藏
+        $(".top-edit-info-BH").find("img").on("click", function () {
+            $(this).parents(".edit-photo-BH").hide();
+        });
+
+        //点击编辑用户信息图标，实现编辑框显示，同时原来的div隐藏
+        $(".top-of-user-info-BH-Mac").find("img").on("click", function () {
+            $(".top-of-user-info-BH-Mac").hide();
+            $(".edit-nickname-BH").show();
+            $(".readin-nickname").focus();
+        });
+
+        //鼠标失去焦点，获取用户输入的值将输入的值替换给原先的用户名
+        $(".readin-nickname").on("blur", function () {
+            var aa = $(".change-nickname").text();
+            var nickname = $(this).val();
+            if ($(this).val() == '') {
+                $(".change-nickname").text(aa);
+                //用户输入的值不为空，则让编辑框隐藏，原先的显示，同时将原先的输入的值清空掉
+                $(".edit-nickname-BH").hide();
+                $(".top-of-user-info-BH-Mac").show();
+            } else {
+                memberCenter.editUserInfo({
+                    account_token: account_token,
+                    nickname: nickname
+                }, function (res) {
+                    if (res.code == 0) {
+                        layer.msg(LANG["success_nick_info"]);
+                        $(".change-nickname").text(nickname);
+                        //用户输入的值不为空，则让编辑框隐藏，原先的显示，同时将原先的输入的值清空掉
+                        $(".edit-nickname-BH").hide();
+                        $(".top-of-user-info-BH-Mac").show();
+                    }
+                })
+            }
+
+        });
+
+        // 点击续费，调转到充值中心，进行套餐购买
+        $("#vip-recharge").on("click", function () {
+            var message = {
+                'method': 'hello',
+                'param1': 'liuyanwei'
+            };
+            // window.webkit.messageHandlers.gotoRecharge.postMessage(message);
+            window.external.gotoRecharge()
+        });
+    </script>
+</body>
+
+</html>

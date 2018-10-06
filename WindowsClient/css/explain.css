@@ -1,0 +1,143 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+body {
+  background: #000;
+  font-family: "Mircrosoft Yahei";
+}
+a {
+  text-decoration: none;
+}
+.wrap-explain-user-BH {
+  width: 302px;
+  height: 245px;
+  border-radius: 2px;
+  background: #FFF;
+  font-size: 16px;
+  font-weight: bold;
+  color: #1F2631;
+  letter-spacing: 0;
+}
+.wrap-explain-user-BH .top-user-explain-BH {
+  width: 100%;
+  height: 40px;
+  background: #E1E6F3;
+}
+.wrap-explain-user-BH .top-user-explain-BH h3 {
+  margin-left: 12px;
+  font-size: 16px;
+  height: 40px;
+  line-height: 40px;
+  color: #1F2631;
+  letter-spacing: 0;
+  overflow: hidden;
+}
+.wrap-explain-user-BH .how-to-pause-BH {
+  width: 100%;
+  height: 108px;
+  border-bottom: 1px solid #DFEBF6;
+  padding: 16px 10px;
+  box-sizing: border-box;
+}
+.wrap-explain-user-BH .how-to-pause-BH .top-pause-speed-BH {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.wrap-explain-user-BH .how-to-pause-BH .top-pause-speed-BH .words-pause-BH {
+  font-weight: bold;
+  font-size: 14px;
+  color: #4F596D;
+  letter-spacing: -0.05px;
+  text-align: center;
+}
+.wrap-explain-user-BH .how-to-pause-BH .top-pause-speed-BH .words-pause-BH b {
+  color: #DE394A;
+}
+.wrap-explain-user-BH .how-to-pause-BH .top-pause-speed-BH .button-pause-BH {
+  width: 60px;
+  height: 20px;
+  line-height: 16px;
+  text-align: center;
+  box-sizing: border-box;
+  padding: 2px 6px;
+  font-size: 12px;
+  color: #FFFFFF;
+  letter-spacing: -0.09px;
+  background: #DE394A;
+  border-radius: 2px;
+}
+.wrap-explain-user-BH .how-to-pause-BH .bottom-pause-speed-BH {
+  width: 100%;
+  font-size: 14px;
+  color: #4F596D;
+  text-align: left;
+  letter-spacing: -0.05px;
+  margin-top: 13px;
+}
+.wrap-explain-user-BH .how-to-pause-BH .bottom-pause-speed-BH span {
+  color: deepskyblue;
+}
+.wrap-explain-user-BH .how-to-pause-BH .bottom-pause-speed-BH .one-info-detail-BH {
+  text-overflow: ellipsis;
+  word-wrap: none;
+}
+.wrap-explain-user-BH .how-to-pause-BH .bottom-pause-speed-BH .two-info-detail-BH {
+  text-overflow: ellipsis;
+  word-wrap: none;
+}
+.wrap-explain-user-BH .how-to-pause-BH .bottom-pause-speed-BH .two-info-detail-BH img {
+  width: 13px;
+  height: 12px;
+  vertical-align: middle;
+}
+.wrap-explain-user-BH .how-to-recover-BH {
+  width: 100%;
+  height: 96px;
+  padding: 16px 10px;
+  box-sizing: border-box;
+}
+.wrap-explain-user-BH .how-to-recover-BH .top-recover-speed-BH {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.wrap-explain-user-BH .how-to-recover-BH .top-recover-speed-BH .words-recover-BH {
+  font-weight: bold;
+  font-size: 14px;
+  color: #4F596D;
+  letter-spacing: -0.05px;
+  text-align: center;
+}
+.wrap-explain-user-BH .how-to-recover-BH .top-recover-speed-BH .words-recover-BH b {
+  color: #2BD190;
+}
+.wrap-explain-user-BH .how-to-recover-BH .top-recover-speed-BH .button-recover-BH {
+  width: 60px;
+  height: 20px;
+  line-height: 16px;
+  text-align: center;
+  box-sizing: border-box;
+  padding: 2px 6px;
+  font-size: 12px;
+  color: #FFFFFF;
+  letter-spacing: -0.09px;
+  background: #2BD190;
+  border-radius: 2px;
+}
+.wrap-explain-user-BH .how-to-recover-BH .bottom-recover-speed-BH {
+  width: 100%;
+  font-size: 14px;
+  color: #4F596D;
+  text-align: left;
+  letter-spacing: -0.05px;
+}
+.wrap-explain-user-BH .how-to-recover-BH .bottom-recover-speed-BH .one-info-detail-BH {
+  margin-top: 16px;
+  text-overflow: ellipsis;
+  word-wrap: none;
+}
+.wrap-explain-user-BH .how-to-recover-BH .bottom-recover-speed-BH .one-info-detail-BH span {
+  color: deepskyblue;
+}

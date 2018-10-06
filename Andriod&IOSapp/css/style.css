@@ -1,0 +1,565 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: 'Helvetica Neue', Helvetica, sans-serif;
+    background: #262c2f;
+    overflow-x: hidden;
+}
+ul {
+    list-style: none;
+}
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+/* 
+
+第一个页面，首页页面 
+
+*/
+
+.header-of-BHapp {
+    margin: 0.12rem 0.5rem;
+}
+
+.wrap-of-header-top {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 0.25rem;
+}
+
+.logo-of-BHapp img {
+    width: 0.98rem;
+    display: block;
+    margin-right: 0.11rem;
+}
+.userinfo-of-BHapp h4 {
+    font-size: 0.36rem;
+    color: #ffffff;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.userinfo-of-BHapp h5 {
+    font-size: 0.24rem;
+    color: #ffffff;
+    font-weight: normal;
+}
+
+.userinfo-of-BHapp h5 span {
+    color: #b23845;
+}
+
+.wrap-of-header-bottom {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.wrap-of-header-bottom img {
+    display: block;
+    vertical-align: middle;
+    margin-right: 0.05rem;
+    width: 0.24rem;
+}
+
+.wrap-of-header-bottom p {
+    margin-right: 0.70rem;
+    display: inline-block;
+    margin-bottom: 0;
+    font-size: .26rem;
+    color: #ffffff;
+}
+
+.wrap-of-header-bottom p span {
+    color: #b23845
+}
+
+.wrap-of-header-bottom p span.tips-active {
+    color:white;
+}
+
+.wrap-of-header-bottom a {
+    background: #de394a;
+    color: #FFFFFF;
+    border-radius: .5rem;
+    font-size: .24rem;
+    padding: .1rem .3rem;
+    box-sizing: border-box;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.wrap-of-header-bottom a.open-active {
+    background:#74353e;
+}
+.packages-BHapp {
+    display: flex;
+    justify-content: space-around;
+}
+.common {
+    flex: 1;
+    text-align: center;
+    font-size: 0.32rem;
+    padding: 0.35rem 1.2rem;
+    box-sizing: border-box;
+}
+.packages-BHapp li{
+    color: #000;
+    background: #e99ba3;
+}
+.packages-BHapp li.active {
+    color: #FFFFFF;
+    background: #d33646;
+}
+
+.device-info {
+    font-size: 0.24rem;
+    color: #ffffff;
+    padding: 0.2rem 0.3rem;
+    box-sizing: border-box;
+}
+
+.packages-list-of-BHapp ul{
+    display: none;
+}
+
+.packages-list-of-BHapp ul:first-child{
+    display: block;
+}
+
+/* 修改后 */
+.packages-list-of-BHapp {
+    margin: 0 0.3rem;
+    overflow: hidden;
+}
+.packages-list-of-BHapp li {
+    float: left;
+    width: 3.40rem;
+    border: 0.01rem solid #d33646;
+    margin-right: 0.05rem;
+    margin-bottom: 0.05rem;
+    text-align: center;
+}
+.packages-list-of-BHapp li:nth-child(2n) {
+    margin-right: 0;
+}
+
+
+.packages-list-of-BHapp li p{
+    font-size: 0.28rem;
+    color: #ffffff;
+    margin-top: 0.4rem;
+}
+
+.packages-list-of-BHapp li h5 {
+    font-size: 0.66rem;
+    color: #ffffff;
+    margin: 0.2rem auto;
+}
+
+.packages-list-of-BHapp li h5 i {
+    font-size: 0.20rem;
+    font-style: normal;
+    /* 默认的i标签的字体颜色 */
+    color: #d33646;
+}
+
+.packages-list-of-BHapp li h6 {
+    width: 80%;
+    font-size: 0.24rem;
+    color: #ffffff;
+    margin: 0.18rem auto 0.2rem;
+    line-height: 2;
+    text-overflow: ellipsis;
+}
+/*  */
+.packages-list-of-BHapp li.packages-active {
+    /* 点击后为当前的li添加的背景颜色，同时也让第一个li呈现默认的红色，将packages-active添加到第一个li上就可以实现 */
+    background: #d33646;
+}
+.packages-list-of-BHapp li.packages-active h5 i {
+    /* 解释同上，rmb符号的颜色跟着当前高亮li标签的样式进行变化，因为这种写法增加了的当前i标签的权重，从而覆盖了其他li下面的i标签的默认样式，这个效果实现起来还真的有点麻烦 */
+    color: #fff;
+}
+
+.hide{
+	display: none;
+}
+
+/* 以上是修改后的代码 */
+
+.pay-money {
+    padding: 0.3rem;
+    box-sizing: border-box;
+    background: #262c2f;
+    color: #FFFFFF;
+}
+
+.pay-ways li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 0.01rem solid #2e3336;
+}
+
+.pay-ways li span {
+    font-size: 0.28rem;
+}
+
+.pay-ways li span p {
+    display: inline-block;
+    margin-left: 0.3rem;
+}
+
+.pay-ways li img:first-child {
+    margin: 0.1rem auto;
+    width: 0.6rem;
+    height: 0.6rem;
+    vertical-align: middle;
+}
+
+.pay-ways li img:last-child {
+    width: 0.32rem;
+    height: 0.32rem;
+}
+
+.payicon {
+    background: url(../img/recharge-small.png) no-repeat;
+    background-size: 100% 100%;
+    width: .32rem;
+    height: .32rem;
+}
+/* 此处用到了交集选择器，获取的是同一级中的某一个 */
+.payicon.payways-active {
+    background: url(../img/choose-small.png) no-repeat;
+    background-size: 100% 100%;
+}
+.pay-instance {
+    height: 1.2rem;
+    line-height: 1.2rem;
+    background: #d33646;
+    text-align: center;
+    font-size: 0.36rem;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+.pay-instance a {
+    color: #fff;
+}
+
+.pay-instance a i {
+    font-style: normal;
+}
+
+.rmb {
+    display: none;
+}
+
+/*
+
+ 第二个页面，暂停恢复
+
+ */
+
+.BH-recover-container {
+    height: 100%;
+    background: #262c2f;
+    margin: 0 auto;
+    padding-top: 0.5rem;
+    box-sizing: border-box;
+}
+
+.surplus-time {
+    margin-bottom: 0.57rem;
+}
+
+.img-container {
+    width: 4.72rem;
+    height: 4.72rem;
+    margin: 0 auto;
+    text-align: center;
+    background: url(../img/getback-small.png) no-repeat center center;
+    background-size: 4.71rem 4.71rem;
+}
+.img-container.img-active {
+    background: url(../img/stop-button-s.png) no-repeat center center;
+    background-size: 4.71rem 4.71rem;
+}
+.surplus-time-detail {
+    margin: 0 auto;
+    width: 4.72rem;
+    height: 4.72rem;
+}
+
+.surplus-time-detail > p {
+    margin-bottom: 0.35rem;
+    padding-top: 1.0rem;
+    font-size: 0.28rem;
+    color: #fff;
+}
+.surplus-time-detail h5 {
+    width: 3.3rem;
+    margin: 0 auto 0.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.surplus-time-detail h5 i {
+    padding: 0 0.25rem;
+    height: 0.7rem;
+    line-height: 0.7rem;
+    background: #1b1c1e;
+    border-radius: 0.1rem;
+    font-style: normal;
+    font-size: 0.56rem;
+    color: #09d1fa;
+}
+.surplus-time-detail h5 i.time-active {
+    color: #38343e;
+}
+.surplus-time-detail h5 span {
+    color: #56535a;
+    font-size: 0.36rem;
+    margin-left: 0.1rem;
+}
+
+.pause-time{
+    display: block;
+    margin: 0 auto;
+    width: 4.63rem;
+    height: 0.97rem;
+    line-height: 0.97rem;
+    text-align: center;
+    border-radius: 0.1rem;
+    box-shadow: 0.02rem 0.05rem #19171c;
+    background: #201d24;
+    background-size: 100% 100%;
+    font-size: .36rem;
+    color: #09d1fa;
+
+}
+.alter-status {
+    background: #de394a;
+    color: white;
+}
+.tips-of-button {
+    margin-top: 0.13rem;
+    text-align: center;
+    font-size: 0.24rem;
+    color: #fff;
+}
+
+.relevent-explain {
+    margin: 0 0.6rem 1.4rem;
+}
+
+.relevent-explain h4 {
+    font-size: 0.3rem;
+    color: #FFF;
+    text-align: center;
+    word-spacing: 0.1rem;
+    margin: 0.63rem auto 0.3rem auto;
+}
+
+.relevent-explain p {
+    font-size: 0.26rem;
+    color: #a9abac;
+    margin-top: 0.3rem;
+    word-spacing: 0.08rem;
+    line-height: 0.48rem;
+}
+
+
+/* 
+
+第三个页面，常见问题
+
+*/
+
+.list-of-normalquestion {
+    margin-left:0.2rem;
+    background: #262c2f;
+    color: #cccccc;
+}
+
+.nomal-selected li {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 0.02rem solid #2e3336;
+    margin: 0.5rem auto 0 auto;
+
+}
+.nomal-selected li p:first-child.detail-active {
+    color: #de394a;
+}
+.nomal-selected li a {
+    margin-right: 0.25rem;
+    margin-bottom: 0.3rem;
+    width: 0.24rem;
+    height: 0.24rem;
+    background: url(../img/defalut-arrow-small.png) no-repeat;
+    background-size: 0.14rem 0.24rem;
+}
+.nomal-selected li a.question-active {
+    
+    background: url(../img/normal-question-small.png) no-repeat center center;
+    background-size: 0.24rem 0.14rem;
+}
+
+.nomal-selected li p {
+    /* height: 0.9rem; */
+    font-size: 0.28rem;
+    text-indent: 0.3rem;
+    margin-bottom: 0.3rem;
+}
+.content-active {
+    color: #de394a;
+}
+
+.detail-content {
+    background: #1d2123;
+}
+.detail-content {
+    padding: 0.2rem 0.3rem;
+    box-sizing: border-box;
+    font-size: 0.26rem;
+    color: #FFF;
+}
+.detail-hide {
+    display: none;
+}
+
+/*
+
+第四个页面，关于我们 
+
+*/
+
+.aboutUs-container {
+    margin: 0.8rem 0.66rem 1.1rem;
+}
+
+.bh-edition {
+    text-align: center;
+}
+
+.bh-edition img {
+    width: 1.74rem;
+}
+
+.bh-edition h3 {
+    color: #fa433b;
+    font-size: 0.36rem;
+    font-weight: 100;
+}
+
+.bh-edition h4 {
+    color: #686a6a;
+    font-size: 0.3rem;
+    margin: 0.28rem auto;
+    font-weight: 100;
+}
+
+.offical-gettouch {
+    color: #e8e8e8;
+    font-size: 0.3rem;
+    font-weight: normal;
+}
+
+.offical-gettouch li {
+    margin-top: 0.75rem;
+}
+.offical-gettouch a {
+    color: #ad3643;
+}
+.bh-wechat-number {
+    text-align: center;
+}
+
+.bh-wechat-number img {
+    vertical-align: middle;
+    margin-top: 0.5rem;
+}
+
+.bh-wechat-number h5 {
+    margin-top: 0.14rem;
+    font-size: 0.24rem;
+    color: #FFF;
+}
+
+/* 公告详情页面 */
+.outer-wrap-bullitin-BH {
+    padding: .4rem 0 0 .25rem;
+    background: #262c2f;
+}
+.header-notice-details-BH {
+    padding-left: .1rem;
+    padding-bottom: .2rem;
+    border-bottom: .01rem solid #505050;
+}
+.contents-update-BH {
+    line-height: .46rem;
+    color: #FFF;
+    font-size: .32rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.header-notice-details-BH p {
+    margin: .2rem auto;
+    color: #b6b7b7;
+    font-size: .24rem;
+}
+
+.banner-img-notice-BH {
+    padding-top: .45rem;
+    text-align: center;
+    padding-right: 0.25rem;
+
+}
+.banner-img-notice-BH img {
+    width: 6.9rem;
+    height: 3.0rem;
+    vertical-align: middle;
+}
+.info-detail-notice-BH {
+    font-size: .28rem;
+    padding-right: 0.4rem;
+    color: #FFF;
+}
+.polite-tips-BH {
+    color: #e2e3e3;
+    margin: .2rem auto 0.1rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.statements-to-customs-BH {
+    
+}
+.statements-to-customs-BH li {
+    text-indent: 2em;
+    height: 0.8rem;
+    line-height: .4rem;
+    overflow: hidden;
+    margin-bottom: 0.1rem;
+}
+.statements-to-customs-BH li a {
+    color: #b6b7b7;
+    width: 6.72rem;
+    display: block;
+} 
